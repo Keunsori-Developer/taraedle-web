@@ -27,7 +27,6 @@ export const ORTHOGRAPHY = [
   'ㅠ',
   'ㅜ',
   'ㅡ',
-  'ㅝ',
 ]
 
 if (CONFIG.normalization) {

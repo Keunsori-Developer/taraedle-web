@@ -3,9 +3,9 @@ import classnames from "classnames";
 
 
 type Props = {
-    children: any,
+    children?: ReactNode,
     value: any,
-    width: any,
+    width?: number,
     status: any,
     onClick: (value: any) => void
 }
@@ -13,7 +13,7 @@ type Props = {
 export const Key = ({
     children,
     status,
-    width,
+    width = 40,
     value,
     onClick
 }: Props) => {
@@ -31,9 +31,10 @@ export const Key = ({
     
     return (
         <button
-            className="classes"
+            style={{width: `${width}px`, height: '58px'}}
+            className={classes}
         >
-
+            {children || value}
         </button>
     )
 }
