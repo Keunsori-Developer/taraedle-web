@@ -1,13 +1,14 @@
 import { ReactNode } from "react";
 import classnames from "classnames";
-
+import { CharStatus } from "../../lib/statuses";
+import { KeyValue } from "../../lib/keyboard";
 
 type Props = {
     children?: ReactNode,
-    value: any,
+    value: KeyValue,
     width?: number,
-    status: any,
-    onClick: (value: any) => void
+    status: CharStatus,
+    onClick: (value: KeyValue) => void
 }
 
 export const Key = ({

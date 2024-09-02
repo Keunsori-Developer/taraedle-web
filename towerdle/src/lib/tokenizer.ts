@@ -13,3 +13,5 @@ export const SORTED_ORTHOGRAPHY = [...ORTHOGRAPHY].sort(
 const joinedCharacters = CONFIG.escapeSpecialCharacters
     ? SORTED_ORTHOGRAPHY.map((x) => escapeRegExp(x)).join('|')
     : SORTED_ORTHOGRAPHY.join('|')
+
+export const ORTHOGRAPHY_PATTERN = new RegExp('(' + joinedCharacters + ')', 'g')
