@@ -14,55 +14,58 @@ type Props = {
 
 export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
     const charStatuses = getStatuses(guesses)
+    const { t } = useTranslation()
 
     const onClick = (value: string) => {
-        console.log(value)
+        if (value === 'ENTER') {
+            onEnter()
+        } else if (value === 'DELETE') {
+            onDelete()
+        } else {
+            onChar(value)
+        }
+
     }
     return (
         <div>
             <div className="flex justify-center mb-1">
-            {ORTHOGRAPHY.slice(0, Math.floor(ORTHOGRAPHY.length * 0.28)).map(
+            {ORTHOGRAPHY.slice(0, Math.floor(ORTHOGRAPHY.length * 10 / 26)).map(
                 (char) => (
                     <Key
                         key={char}
                         value={char}
                         onClick={onClick}
-                        status={'absent'}/>
+                        status={charStatuses[char]}/>
                 )
             )}
             </div>
             <div className="flex justify-center mb-1">
-            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length * 0.28), Math.floor(ORTHOGRAPHY.length * 0.58)).map(
+            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length * 10 / 26), Math.floor(ORTHOGRAPHY.length * 19 / 26)).map(
                 (char) => (
                     <Key
                         key={char}
                         value={char}
                         onClick={onClick}
-                        status={'absent'}/>
+                        status={charStatuses[char]}/>
                 )
             )}
             </div>
             <div className="flex justify-center mb-1">
-            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length * 0.58), Math.floor(ORTHOGRAPHY.length * 0.82)).map(
+            <Key key="enterKey" width={65.4} value="ENTER" onClick={onClick}>
+            {t('ENTER')}
+            </Key>
+            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length* 19 / 26), ORTHOGRAPHY.length).map(
                 (char) => (
                     <Key
                         key={char}
                         value={char}
                         onClick={onClick}
-                        status={'absent'}/>
+                        status={charStatuses[char]}/>
                 )
-            )}
-            </div>
-            <div className="flex justify-center mb-1">
-            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length * 0.82), ORTHOGRAPHY.length).map(
-                (char) => (
-                    <Key
-                        key={char}
-                        value={char}
-                        onClick={onClick}
-                        status={'absent'}/>
-                )
-            )}
+                )}
+                <Key key="deleteKey" width={65.4} value="DELETE" onClick={onClick}>
+            {t('DELETE')}
+            </Key>
             </div>
         </div>
     )

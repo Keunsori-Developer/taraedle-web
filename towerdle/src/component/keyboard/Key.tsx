@@ -7,7 +7,7 @@ type Props = {
     children?: ReactNode,
     value: KeyValue,
     width?: number,
-    status: CharStatus,
+    status?: CharStatus,
     onClick: (value: KeyValue) => void
 }
 
@@ -30,10 +30,16 @@ export const Key = ({
         }
       )
     
+    const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
+        onClick(value)
+        event.currentTarget.blur()
+    }
+    
     return (
         <button
             style={{width: `${width}px`, height: '58px'}}
             className={classes}
+            onClick={handleClick}
         >
             {children || value}
         </button>

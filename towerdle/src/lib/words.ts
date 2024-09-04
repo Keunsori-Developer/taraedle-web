@@ -1,7 +1,7 @@
 import { CONFIG } from '../constant/config'
 import { WordFromWeb } from './wordFromWeb'
 
-const val = await WordFromWeb()
+// const val = await WordFromWeb()
 
 export const getWordOfDay = () => {
     // January 1, 2022 Game Epoch
@@ -11,7 +11,8 @@ export const getWordOfDay = () => {
     const index = Math.floor((now - epochMs) / msInDay)
     const nextday = (index + 1) * msInDay + epochMs
     return {
-      solution: val,
+        //   solution: val,
+        solution: '테스트',
       tomorrow: nextday,
     }
   }

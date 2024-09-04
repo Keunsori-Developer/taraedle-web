@@ -6,7 +6,8 @@ interface Word {
   value: string
 }
 
-export const WordFromWeb = async() => {
+export const WordFromWeb = async () => {
+  console.log('wordFromWeb')
   try {
     const response = await axios.get<Word>(
       `https://api.randommagic.xyz/word?count=6&complexVowel=true&complexConsonant=false`
