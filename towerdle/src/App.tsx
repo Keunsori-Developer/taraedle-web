@@ -4,7 +4,11 @@ import { useState, useEffect } from 'react';
 import { Keyboard } from './component/keyboard/Keyboard';
 import { Grid } from './component/grid/Grid';
 import { CONFIG } from './constant/config';
-import { solution } from './lib/words';
+import { solution, isWinngWord } from './lib/words';
+import { useTranslation } from 'react-i18next';
+import { Alert } from './component/alerts/Alert';
+
+const ALERT_TIME_MS = 2000
 
 function App() {
   const [data, setData] = useState<string>('');
@@ -13,6 +17,9 @@ function App() {
   const [currentGuess, setCurrentGuess] = useState<Array<string>>([])
   const [isGameWon, setIsGameWon] = useState(false)
   const [isGameLost, setIsGameLost] = useState(false)
+  const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
+
+  const { t } = useTranslation()
 
   const dataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value)
@@ -32,12 +39,25 @@ function App() {
 
     if (!(currentGuess.length === CONFIG.wordLength)) {
       console.log('word length is not enough')
-      return
+      setIsNotEnoughLetters(true)
+      return setTimeout(() => {
+        setIsNotEnoughLetters(false)
+      }, ALERT_TIME_MS)
     }
-    const winningWord = currentGuess.join('')
+    const winningWord = isWinngWord(currentGuess.join(''))
 
-    setGuesses([...guesses, currentGuess])
-    setCurrentGuess([]) 
+    if (currentGuess.length === CONFIG.wordLength && guesses.length < CONFIG.tries && !isGameWon) {      
+      setGuesses([...guesses, currentGuess])
+      setCurrentGuess([]) 
+
+      if (winningWord) {
+        return setIsGameWon(true)
+      }
+
+      if (guesses.length == CONFIG.tries - 1) {
+        return setIsGameLost(true)
+      }
+    }
   }
 
   const onDelete = () => {
@@ -54,6 +74,10 @@ function App() {
         guesses={guesses}
       />
       {/* {solution} */}
+
+      <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} />
+      <Alert message={t('game lose')} isOpen={isGameLost} />
+      <Alert message={t('game win')} isOpen={isGameWon}/>
     </div>
   );
 }
