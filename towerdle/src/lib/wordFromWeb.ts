@@ -12,7 +12,7 @@ export const WordFromWeb = async () => {
       `https://api.randommagic.xyz/word?count=6&complexVowel=true&complexConsonant=false`
     )
     const val = response.data.value
-    return toCharArray(val)
+    return val
   } catch (error) {
     throw error
   }

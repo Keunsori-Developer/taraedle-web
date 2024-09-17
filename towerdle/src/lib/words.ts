@@ -2,8 +2,8 @@ import { CONFIG } from '../constant/config'
 import { toCharArray } from './stringToCharArray'
 import { WordFromWeb } from './wordFromWeb'
 
-// const val = await WordFromWeb()
-const val = '테스트'
+const val = await WordFromWeb()
+// const val = '테스트'
 
 export const isWinngWord = (word: string) => {
     const charVal = toCharArray(val)
