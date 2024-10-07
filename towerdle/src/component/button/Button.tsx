@@ -7,12 +7,12 @@ type props = {
 
 export const Button = ({ value, onClick }: props) => {
     const style = {
-        width: '15%',
+        width: '30vw',
         height: '60px',
         border: 'solid 1px',
         borderRadius: '3px',
         margin: '10px',
-        fontSize: '150%',
+        fontSize: '30px',
     }
     return (
         <div>
