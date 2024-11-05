@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react';
 import { Keyboard } from '../component/keyboard/Keyboard';
 import { Grid } from '../component/grid/Grid';
 import { CONFIG } from '../constant/config';
-import { solution, isWinngWord } from '../lib/words';
+import { solution, isWinngWord, exportResult } from '../lib/words';
 import { useTranslation } from 'react-i18next';
 import { Alert } from '../component/alerts/Alert';
+import { Button } from "@headlessui/react";
 
 const ALERT_TIME_MS = 2000
 
@@ -50,6 +51,7 @@ export const ProblemPage = () => {
       setCurrentGuess([]) 
 
       if (winningWord) {
+        exportResult()
         return setIsGameWon(true)
       }
 
@@ -72,6 +74,7 @@ export const ProblemPage = () => {
         onEnter={onEnter}
         guesses={guesses}
       />
+
 
       <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} />
       <Alert message={t('game lose')} isOpen={isGameLost} />
