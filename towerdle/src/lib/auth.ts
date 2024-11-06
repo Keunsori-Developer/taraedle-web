@@ -62,6 +62,7 @@ apiClient.interceptors.response.use(
     },
     (error) => {
         if (error.response && error.response.status === 401) {
+            console.log('401 error')
             getNewToken()
             return;
         }

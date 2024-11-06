@@ -17,13 +17,14 @@ export const isWinngWord = (word: string) => {
     return word === charVal;
 }
 
-export const exportResult = async () => {
+export const exportResult = async (tries: number, isSolved: boolean) => {
+    console.log(`tries : ${tries}, isSolved: ${isSolved}`)
     try {
         const response = await apiClient.post<any>(
             `/word/solve`, { 
                 wordId: val.id,
-                attempts: 1,
-                isSolved: true
+                attempts: tries,
+                isSolved: isSolved
              },
         )
         console.log('send success')
@@ -33,7 +34,6 @@ export const exportResult = async () => {
 }
 
 export const getWordOfDay = () => {
-    // January 1, 2022 Game Epoch
     const epochMs = new Date(CONFIG.startDate).valueOf()
     const now = Date.now()
     const msInDay = 86400000

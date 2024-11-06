@@ -51,11 +51,12 @@ export const ProblemPage = () => {
       setCurrentGuess([]) 
 
       if (winningWord) {
-        exportResult()
+        exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
       }
 
       if (guesses.length == CONFIG.tries - 1) {
+        exportResult(CONFIG.tries - 1, false)
         return setIsGameLost(true)
       }
     }
