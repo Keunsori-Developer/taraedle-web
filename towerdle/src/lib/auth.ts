@@ -138,6 +138,8 @@ export const getNewToken = async () => {
         const response = await apiClient.post<newToken>(
             `/auth/refresh`, { refreshToken },
         )
+        setRefreshToken(response.data.refreshToken)
+        setAccessToken(response.data.accessToken)
         return response.data.accessToken;
     } catch (error) {
         throw error
