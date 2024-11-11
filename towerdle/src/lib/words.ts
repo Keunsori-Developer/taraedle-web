@@ -2,15 +2,8 @@ import { CONFIG } from '../constant/config'
 import apiClient, { getAccessToken, getNewToken } from './auth'
 import { toCharArray } from './stringToCharArray'
 import { WordFromWeb } from './wordFromWeb'
-import axios from 'axios'
 
-const val = await WordFromWeb()
-
-const solveInfo = {
-    wordId: val.id,
-    attempts: 1,
-    isSolved: true
-}
+const val = await WordFromWeb(6, true, false)
 
 export const isWinngWord = (word: string) => {
     const charVal = toCharArray(val.value)
@@ -18,16 +11,14 @@ export const isWinngWord = (word: string) => {
 }
 
 export const exportResult = async (tries: number, isSolved: boolean) => {
-    console.log(`tries : ${tries}, isSolved: ${isSolved}`)
     try {
-        const response = await apiClient.post<any>(
+        await apiClient.post<any>(
             `/word/solve`, { 
                 wordId: val.id,
                 attempts: tries,
                 isSolved: isSolved
-             },
+            },
         )
-        console.log('send success')
     } catch (error) {
         throw error;
     }

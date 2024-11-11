@@ -56,15 +56,46 @@ apiClient.interceptors.request.use(
     }
 )
 
+let isRefreshing = false;
+let failedQueue: any[] = [];
+
 apiClient.interceptors.response.use(
     (response) => {
         return response;
     },
     (error) => {
-        if (error.response && error.response.status === 401) {
-            console.log('401 error')
-            getNewToken()
-            return;
+        const originalRequest = error.config;
+        if (error.response && error.response.status === 401 && !originalRequest._retry) {
+            if (isRefreshing) {
+                return new Promise((resolve, reject) => {
+                    failedQueue.push({ resolve, reject });
+                }).then(token => {
+                    originalRequest.headers['Authorization'] = `Bearer ${token}`;
+                    return apiClient(originalRequest);
+                }).catch(err => {
+                    return Promise.reject(err);
+                })
+            }
+            originalRequest._retry = true;
+            isRefreshing = true;
+            return new Promise(async (resolve, reject) => {
+                try {
+                    const newToken = await getNewToken()
+                    apiClient.defaults.headers.common['Authorization'] = `Bearer ${newToken}`;
+                    originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+
+                    failedQueue.forEach(request => request.resolve(newToken));
+                    failedQueue = [];
+
+                    resolve(apiClient(originalRequest));
+                } catch (err) {
+                    failedQueue.forEach(request => request.reject(err));
+                    failedQueue = [];
+                    reject(err);
+                } finally {
+                    isRefreshing = false;
+                }
+            });
         }
         return Promise.reject(error);
     }
@@ -107,8 +138,7 @@ export const getNewToken = async () => {
         const response = await apiClient.post<newToken>(
             `/auth/refresh`, { refreshToken },
         )
-        setAccessToken(response.data.accessToken)
-        setRefreshToken(response.data.refreshToken)
+        return response.data.accessToken;
     } catch (error) {
         throw error
     }

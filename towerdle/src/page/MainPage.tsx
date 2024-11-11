@@ -43,8 +43,6 @@ export const MainPage = () => {
                     window.open('https://api.randommagic.xyz/auth/login/google', '로그인', 'width=430,height=500,location=no,status=no,scrollbars=yes')
                     }} />
             }
-
-        <Button value="토큰변경" onClick={() => { localStorage.setItem('accessToken', '1')}}/>
         </div>
     )
 }
