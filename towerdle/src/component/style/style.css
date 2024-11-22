@@ -1,0 +1,11 @@
+.bg-absent .inputCell .cellStyle{
+    fill: #999999
+}
+
+.bg-correct .inputCell .cellStyle{
+    fill: #658C5E
+}
+
+.bg-present .inputCell .cellStyle{
+    fill: #C0994E
+}
