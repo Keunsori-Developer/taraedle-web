@@ -1,11 +1,32 @@
 .bg-absent .inputCell .cellStyle{
-    fill: #999999
+    stroke: #999999
 }
 
 .bg-correct .inputCell .cellStyle{
-    fill: #658C5E
+    stroke: #658C5E
 }
 
 .bg-present .inputCell .cellStyle{
-    fill: #C0994E
+    stroke: #C0994E
+}
+
+.key{
+    color: white;
+}
+
+.bg-default.key{
+    background-color: #E2E8F0;
+    color: black;
+}
+
+.bg-absent.key{
+    background-color: #999999;
+}
+
+.bg-correct.key{
+    background-color: #658C5E;
+}
+
+.bg-present.key{
+    background-color: #C0994E;
 }

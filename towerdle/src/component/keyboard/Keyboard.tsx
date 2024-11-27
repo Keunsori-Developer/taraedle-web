@@ -17,10 +17,13 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
     const { t } = useTranslation()
 
     const onClick = (value: string) => {
+        console.log(value);
         if (value === 'ENTER') {
             onEnter()
         } else if (value === 'DELETE') {
             onDelete()
+        } else if (value === '') {
+            return;
         } else {
             onChar(value)
         }
@@ -29,7 +32,7 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
     return (
         <div>
             <div className="flex justify-center mb-1">
-            {ORTHOGRAPHY.slice(0, Math.floor(ORTHOGRAPHY.length * 10 / 26)).map(
+            {ORTHOGRAPHY.slice(0, Math.floor(ORTHOGRAPHY.length * 10 / 36)).map(
                 (char) => (
                     <Key
                         key={char}
@@ -40,7 +43,18 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
             )}
             </div>
             <div className="flex justify-center mb-1">
-            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length * 10 / 26), Math.floor(ORTHOGRAPHY.length * 19 / 26)).map(
+            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length * 10 / 36), Math.floor(ORTHOGRAPHY.length * 20 / 36)).map(
+                (char) => (
+                    <Key
+                        key={char}
+                        value={char}
+                        onClick={onClick}
+                        status={charStatuses[char]}/>
+                )
+            )}
+            </div>
+            <div className="flex justify-center mb-1">
+            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length * 20 / 36), Math.floor(ORTHOGRAPHY.length * 29 / 36)).map(
                 (char) => (
                     <Key
                         key={char}
@@ -54,7 +68,7 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
             <Key key="enterKey" width={65.4} value="ENTER" onClick={onClick}>
             {t('ENTER')}
             </Key>
-            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length* 19 / 26), ORTHOGRAPHY.length).map(
+            {ORTHOGRAPHY.slice(Math.floor(ORTHOGRAPHY.length* 29 / 36), ORTHOGRAPHY.length).map(
                 (char) => (
                     <Key
                         key={char}

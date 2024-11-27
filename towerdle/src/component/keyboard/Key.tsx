@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import classnames from "classnames";
 import { CharStatus } from "../../lib/statuses";
 import { KeyValue } from "../../lib/keyboard";
+import '../style/style.css'
 
 type Props = {
     children?: ReactNode,
@@ -21,11 +22,11 @@ export const Key = ({
     const classes = classnames(
         'flex items-center justify-center rounded mx-0.5 text-xs font-bold cursor-pointer select-none',
         {
-          'bg-slate-200 hover:bg-slate-300 active:bg-slate-400': !status,
-          'bg-slate-400 text-white': status === 'absent',
-          'bg-purple-500 hover:bg-purple-600 active:bg-purple-700 text-white':
+          'bg-default': !status,
+          'bg-absent': status === 'absent',
+          'bg-correct':
             status === 'correct',
-          'bg-orange-500 hover:bg-orange-600 active:bg-orange-700 text-white':
+          'bg-present':
             status === 'present',
         }
       )
@@ -38,7 +39,7 @@ export const Key = ({
     return (
         <button
             style={{width: `${width}px`, height: '58px'}}
-            className={classes}
+            className={`${classes} key`}
             onClick={handleClick}
         >
             {children || value}

@@ -1,6 +1,16 @@
 import { CONFIG } from './config'
 
 export const ORTHOGRAPHY = [
+  'ㅃ',
+  'ㅉ',
+  'ㄸ',
+  'ㄲ',
+  'ㅆ',
+  '',
+  '',
+  '',
+  'ㅒ',
+  'ㅖ',
   'ㅂ',
   'ㅈ',
   'ㄷ',

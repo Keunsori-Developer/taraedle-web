@@ -67,7 +67,7 @@ export const ProblemPage = () => {
   }
 
   return (
-    <div className="App">
+    <div>
       <Grid guesses={guesses} currentGuess={currentGuess}/>
       <Keyboard
         onChar={onChar}
@@ -77,9 +77,9 @@ export const ProblemPage = () => {
       />
 
 
-      <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} />
-      <Alert message={t('game lose')} isOpen={isGameLost} />
-      <Alert message={t('game win')} isOpen={isGameWon}/>
+      <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} variant="warning"/>
+      <Alert message={t('game lose')} isOpen={isGameLost} variant="warning"/>
+      <Alert message={t('game win')} isOpen={isGameWon} variant="success"/>
     </div>
   );
 }
