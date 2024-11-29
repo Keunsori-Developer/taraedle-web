@@ -1,20 +1,36 @@
 import { CONFIG } from '../constant/config'
 import apiClient, { getAccessToken, getNewToken } from './auth'
 import { toCharArray } from './stringToCharArray'
-import { WordFromWeb } from './wordFromWeb'
+import { Word, WordFromWeb, Meaning } from './wordFromWeb'
 
-const val = await WordFromWeb(6, true, false)
+const answer = await WordFromWeb(6, true, false)
+
+export interface wordInfo {
+    id: string,
+    value: string,
+    length: number,
+    count: number,
+    definitions: Meaning[],
+}
 
 export const isWinngWord = (word: string) => {
-    const charVal = toCharArray(val.value)
+    const charVal = toCharArray(answer.value)
     return word === charVal;
+}
+
+export const winningWordInfo = () => {
+    const info: wordInfo = {
+        ...answer
+    }
+    return info
+
 }
 
 export const exportResult = async (tries: number, isSolved: boolean) => {
     try {
         await apiClient.post<any>(
             `/word/solve`, { 
-                wordId: val.id,
+                wordId: answer.id,
                 attempts: tries,
                 isSolved: isSolved
             },
@@ -31,7 +47,7 @@ export const getWordOfDay = () => {
     const index = Math.floor((now - epochMs) / msInDay)
     const nextday = (index + 1) * msInDay + epochMs
     return {
-        solution: val.value,
+        solution: answer.value,
         tomorrow: nextday,
     }
   }

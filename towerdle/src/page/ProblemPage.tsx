@@ -3,24 +3,32 @@ import { useState, useEffect } from 'react';
 import { Keyboard } from '../component/keyboard/Keyboard';
 import { Grid } from '../component/grid/Grid';
 import { CONFIG } from '../constant/config';
-import { solution, isWinngWord, exportResult } from '../lib/words';
+import { solution, isWinngWord, exportResult, winningWordInfo, wordInfo } from '../lib/words';
 import { useTranslation } from 'react-i18next';
-import { Alert } from '../component/alerts/Alert';
+import { Alert } from '../component/popup/Alert';
 import { Button } from "@headlessui/react";
+import { ResultPopup } from "../component/popup/ResultPopup";
+import { Meaning, Word } from "../lib/wordFromWeb";
 
 const ALERT_TIME_MS = 2000
 
 export const ProblemPage = () => {
-    const [data, setData] = useState<string>('');
+  const [data, setData] = useState<string>('');
   const [value, setValue] = useState<string>('');
   const [guesses, setGuesses] = useState<string[][]>([])
   const [currentGuess, setCurrentGuess] = useState<Array<string>>([])
   const [isGameWon, setIsGameWon] = useState(false)
   const [isGameLost, setIsGameLost] = useState(false)
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
+  const [info, setInfo] = useState<wordInfo>({
+    id: '',
+    value: '',
+    length: 0,
+    count: 0,
+    definitions: [],
+  });
 
   const { t } = useTranslation()
-
   const dataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value)
   }
@@ -44,19 +52,23 @@ export const ProblemPage = () => {
         setIsNotEnoughLetters(false)
       }, ALERT_TIME_MS)
     }
+
     const winningWord = isWinngWord(currentGuess.join(''))
 
     if (currentGuess.length === CONFIG.wordLength && guesses.length < CONFIG.tries && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
+      setInfo(winningWordInfo())
 
       if (winningWord) {
-        exportResult(guesses.length + 1, true)
+        // 데이터 전송 주석
+        // exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
       }
-
+      
       if (guesses.length == CONFIG.tries - 1) {
-        exportResult(CONFIG.tries - 1, false)
+        // 데이터 전송 주석
+        // exportResult(CONFIG.tries - 1, false)
         return setIsGameLost(true)
       }
     }
@@ -77,9 +89,9 @@ export const ProblemPage = () => {
       />
 
 
-      <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} variant="warning"/>
-      <Alert message={t('game lose')} isOpen={isGameLost} variant="warning"/>
-      <Alert message={t('game win')} isOpen={isGameWon} variant="success"/>
+      <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} variant="warning" />
+      <ResultPopup isOpen={isGameWon} leftFunction={() => { window.location.href = '/' }} rightFunction={() => { window.location.href = '/problem' }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
+      <ResultPopup isOpen={isGameLost} leftFunction={() => { window.location.href = '/' }} rightFunction={() => { window.location.href = '/problem' }} title="오답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
     </div>
   );
 }

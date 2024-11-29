@@ -1,10 +1,16 @@
-import axios from 'axios'
-import { toCharArray } from './stringToCharArray'
 import apiClient from './auth'
 
-interface Word {
+export interface Word {
   id: string,
-  value: string
+  value: string,
+  length: number,
+  count: number,
+  definitions: string,
+}
+
+export interface Meaning {
+  pos: string,
+  meanings: string[]
 }
 
 export const WordFromWeb = async (count?: number, complexVowel?: boolean, complexConsonant?: boolean) => {
@@ -16,12 +22,15 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
 
   try {
     const response = await apiClient.get<Word>(
-      // `/word?count=6&complexVowel=true&complexConsonant=false`
       `/word${queryParams ? `?${queryParams}` : ''}`
     )
-    const val = response.data
-    console.log(val)
-    return val
+    const data = response.data
+    const parseDefinitions: Meaning[] = JSON.parse(data.definitions);
+    const result = {
+      ...data,
+      definitions: parseDefinitions
+    }
+    return result
   } catch (error) {
     throw error
   }

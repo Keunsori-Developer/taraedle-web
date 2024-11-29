@@ -17,7 +17,6 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
     const { t } = useTranslation()
 
     const onClick = (value: string) => {
-        console.log(value);
         if (value === 'ENTER') {
             onEnter()
         } else if (value === 'DELETE') {

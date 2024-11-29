@@ -16,7 +16,7 @@ export const Key = ({
     children,
     status,
     width = 40,
-    value,
+    value = '',
     onClick
 }: Props) => {
     const classes = classnames(
