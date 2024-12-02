@@ -87,5 +87,4 @@ jobs:
 
           ssh -tt -i ~/.ssh/id_ed25519 $USER@$IP docker run -d \
           --name $NAME \
-          --expose 80 \
           $DOCKER_IMAGE
