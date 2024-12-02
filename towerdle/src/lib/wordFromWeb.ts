@@ -24,7 +24,7 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
     const response = await apiClient.get<Word>(
       `/word${queryParams ? `?${queryParams}` : ''}`
     )
-    const data = response.data
+    const data = response.data  
     const parseDefinitions: Meaning[] = JSON.parse(data.definitions);
     const result = {
       ...data,
