@@ -1,0 +1,14 @@
+services:
+  taraedle_web:
+    image: 'taraedle_web'
+    build: .
+    container_name: taraedle_web
+    expose:
+      - '80'
+    restart: always
+    networks:
+        - nginx-proxy
+            
+networks:  
+  nginx-proxy:    
+    external: true
