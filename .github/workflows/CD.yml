@@ -87,4 +87,5 @@ jobs:
 
           ssh -tt -i ~/.ssh/id_ed25519 $USER@$IP docker run -d \
           --name $NAME \
+          --network=nginx-proxy \
           $DOCKER_IMAGE
