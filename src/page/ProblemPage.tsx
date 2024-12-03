@@ -9,6 +9,7 @@ import { Alert } from '../component/popup/Alert';
 import { Button } from "@headlessui/react";
 import { ResultPopup } from "../component/popup/ResultPopup";
 import { Meaning, Word } from "../lib/wordFromWeb";
+import * as Hangul from 'hangul-js'
 
 const ALERT_TIME_MS = 2000
 
@@ -20,6 +21,7 @@ export const ProblemPage = () => {
   const [isGameWon, setIsGameWon] = useState(false)
   const [isGameLost, setIsGameLost] = useState(false)
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
+  const [isNotMeaningful, setIsNotMeaningful] = useState(false);
   const [info, setInfo] = useState<wordInfo>({
     id: '',
     value: '',
@@ -46,11 +48,18 @@ export const ProblemPage = () => {
     }
 
     if (!(currentGuess.length === CONFIG.wordLength)) {
-      console.log('word length is not enough')
       setIsNotEnoughLetters(true)
       return setTimeout(() => {
         setIsNotEnoughLetters(false)
       }, ALERT_TIME_MS)
+    }
+
+    const chkVal = Hangul.assemble(currentGuess);
+    if (!Hangul.isComplete(chkVal)) {
+      setIsNotMeaningful(true)
+      return setTimeout(() => {
+        setIsNotMeaningful(false)
+      }, ALERT_TIME_MS);
     }
 
     const winningWord = isWinngWord(currentGuess.join(''))
@@ -90,6 +99,7 @@ export const ProblemPage = () => {
 
 
       <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} variant="warning" />
+      <Alert message={t('length is not meaningful')} isOpen={isNotMeaningful} variant="warning" />
       <ResultPopup isOpen={isGameWon} leftFunction={() => { window.location.href = '/' }} rightFunction={() => { window.location.href = '/problem' }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
       <ResultPopup isOpen={isGameLost} leftFunction={() => { window.location.href = '/' }} rightFunction={() => { window.location.href = '/problem' }} title="오답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
     </div>
