@@ -108,7 +108,8 @@ export const exportResult = async (tries: number, isSolved: boolean) => {
 }
 
 export const getAnswer = () => {
-    return {solution : getQuiz().word.value};
+    // return {solution : getQuiz().word.value};
+    return {solution: '테스트'}
 }
 export const { solution } = getAnswer()
 
