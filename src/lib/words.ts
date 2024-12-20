@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { CONFIG } from '../constant/config'
 import apiClient, { getAccessToken, getNewToken } from './auth'
 import { toCharArray } from './stringToCharArray'
-import { Word, WordFromWeb, Meaning } from './wordFromWeb'
+import { Word, WordFromWeb, Meaning, Quiz } from './wordFromWeb'
 
 // const answer: wordInfo = {
 //     id : '1',
@@ -29,40 +29,69 @@ export interface wordInfo {
     definitions: Meaning[],
 }
 
-export const isWinngWord = (word: string) => {
-    if (answer) {
-        const charVal = toCharArray(answer.value)
-        return word === charVal;
+export const getQuiz = () => {
+    const quizJson = window.localStorage.getItem('quiz');
+    if (quizJson) {
+        const quiz = JSON.parse(quizJson);
+        console.log(quiz.word.value);
+        return quiz;
     }
 }
 
-export const winningWordInfo = () => {
-    // if (answer) {
-        const info: wordInfo = {
-            ...answer
-        }
-        return info
+export const isWinngWord = (word: string) => {
+    // const quizJson = window.localStorage.getItem('quiz')
+    // if (quizJson) {
+    //     const quiz: Quiz = JSON.parse(quizJson);
+    //     const charVal = toCharArray(quiz.word.value);
+    //     return word === charVal;
     // }
+    // if (answer) {
+    //     const charVal = toCharArray(answer.value)
+    //     return word === charVal;
+    // }
+    const charVal = toCharArray(getQuiz().word.value);
+    return word === charVal;
 }
 
+// export const winningWordInfo = () => {
+//     // if (answer) {
+//         // const info: wordInfo = {
+//         //     ...answer
+//         // }
+//         // return info
+//     // }
+// }
+
 export const exportResult = async (tries: number, isSolved: boolean) => {
-    if (answer) {
-        try {
-            await apiClient.post<any>(
-                `/word/solve`, { 
-                    wordId: answer.id,
-                    attempts: tries,
-                    isSolved: isSolved
-                },
-            )
-        } catch (error) {
-            throw error;
-        }
+    // if (answer) {
+    //     try {
+    //         await apiClient.post<any>(
+    //             `/word/solve`, {
+    //                 wordId: answer.id,
+    //                 attempts: tries,
+    //                 isSolved: isSolved
+    //             },
+    //         )
+    //     } catch (error) {
+    //         throw error;
+    //     }
+    // }
+    
+    try {
+        await apiClient.post<any>(
+            `/word/solve`, {
+                wordId: getQuiz().uuid,
+                attempts: tries,
+                isSolved: isSolved
+            }
+        )
+    } catch (error) {
+        throw error;
     }
 }
 
 export const getAnswer = () => {
-    return {solution : answer.value};
+    return {solution : getQuiz().word.value};
 }
 export const { solution } = getAnswer()
 

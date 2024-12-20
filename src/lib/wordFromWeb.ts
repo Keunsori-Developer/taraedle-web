@@ -61,16 +61,18 @@ export const getQuiz = async (difficulty: string) => {
     const response = await apiClient.post<Quiz>(
       `/quiz`, {difficulty}
     )
-    console.log(response);
+    // console.log(response);
     const data = response.data;
-    console.log(data.word.value);
+    // console.log(data.word.value);
     const parseDefinitions: Meaning[] = JSON.parse(data.word.definitions);
     const result = {
       ...data,
       definitions: parseDefinitions
     }
-    return result
-
+    // return result
+    const quiz = JSON.stringify(result);
+    window.localStorage.setItem('quiz', quiz);
+    window.location.href = 'problem';
   } catch (error) {
     throw error
   }
