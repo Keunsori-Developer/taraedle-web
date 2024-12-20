@@ -8,6 +8,23 @@ export interface Word {
   definitions: string,
 }
 
+export interface Quiz {
+  uuid: string,
+  word: {
+    value: string,
+    definitions: string,
+  },
+  difficulty: {
+    lengthMin: number,
+    lengthMax: number,
+    countMin: number,
+    countMax: number,
+    complexVowel: boolean,
+    complexConsonant: boolean,
+    maxAttempts: number
+  }
+}
+
 export interface Meaning {
   pos: string,
   meanings: string[]
@@ -41,13 +58,13 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
 
 export const getQuiz = async (difficulty: string) => {
   try {
-    console.log(difficulty);
-    const response = await apiClient.post<Word>(
+    const response = await apiClient.post<Quiz>(
       `/quiz`, {difficulty}
     )
+    console.log(response);
     const data = response.data;
-    console.log(data.value);
-    const parseDefinitions: Meaning[] = JSON.parse(data.definitions);
+    console.log(data.word.value);
+    const parseDefinitions: Meaning[] = JSON.parse(data.word.definitions);
     const result = {
       ...data,
       definitions: parseDefinitions
