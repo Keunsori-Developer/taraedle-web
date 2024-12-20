@@ -33,10 +33,10 @@ export const setRefreshToken = (token: string) => {
     localStorage.setItem('refreshToken', token)
 }
 
-export const clearToken = () => {
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('refreshToken')
-}
+// export const clearToken = () => {
+//     localStorage.removeItem('accessToken')
+//     localStorage.removeItem('refreshToken')
+// }
 
 const apiClient: AxiosInstance = axios.create({
     baseURL: 'https://api.randommagic.xyz',
@@ -124,8 +124,9 @@ export const Logout = async () => {
         await apiClient.post<void>(
             `/auth/logout`, { refreshToken },
         )
-        localStorage.removeItem('code')
-        clearToken()
+        // localStorage.removeItem('code')
+        // clearToken()
+        localStorage.clear();
         window.location.reload()
     } catch (error) {
         console.log('로그아웃 실패')

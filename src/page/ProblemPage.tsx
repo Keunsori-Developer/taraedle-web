@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from 'react';
 import { Keyboard } from '../component/keyboard/Keyboard';
 import { Grid } from '../component/grid/Grid';
@@ -80,6 +80,7 @@ export const ProblemPage = () => {
       }
     }
   }
+
 
   const onDelete = () => {
     setCurrentGuess(currentGuess.slice(0, -1))
