@@ -15,7 +15,7 @@ export const getQuiz = () => {
     const quizJson = window.localStorage.getItem('quiz');
     if (quizJson) {
         const quiz = JSON.parse(quizJson);
-        console.log(`quiz : ${quiz.word.value}`);
+        console.log(`quiz : ${quiz}`);
         return quiz;
     }
 }

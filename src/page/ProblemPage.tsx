@@ -33,18 +33,6 @@ export const ProblemPage = () => {
     setData(e.target.value)
   }
 
-  // const quizSetting = getQuizSetting();
-
-  // difficulty: {
-  //   lengthMin: number,
-  //   lengthMax: number,
-  //   countMin: number,
-  //   countMax: number,
-  //   complexVowel: boolean,
-  //   complexConsonant: boolean,
-  //   maxAttempts: number
-  // }
-
   const onChar = (value: string) => {
     if (currentGuess.length < CONFIG.wordLength && guesses.length < CONFIG.tries && !isGameWon) {
       let newGuess = currentGuess.concat([value])
