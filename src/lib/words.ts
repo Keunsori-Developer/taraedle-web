@@ -35,6 +35,23 @@ export const getQuiz = () => {
         const quiz = JSON.parse(quizJson);
         console.log(quiz.word.value);
         return quiz;
+    } else {
+        const quiz: Quiz = {
+            uuid: "string",
+            word: {
+                value: "string",
+                definitions: "string",
+            },
+            difficulty: {
+                lengthMin: 1,
+                lengthMax: 1,
+                countMin: 1,
+                countMax: 1,
+                complexVowel: false,
+                complexConsonant: false,
+                maxAttempts: 1
+            }
+        }
     }
 }
 
