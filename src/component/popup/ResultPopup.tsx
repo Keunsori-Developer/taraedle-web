@@ -1,7 +1,5 @@
 import { Transition } from "@headlessui/react";
 import classNames from "classnames";
-import React from "react";
-import { Meaning, Word } from "../../lib/wordFromWeb";
 import successImage from '../../asset/taraedle-congrat.gif';
 import '../style/style.css'
 import { wordInfo } from "../../lib/words";

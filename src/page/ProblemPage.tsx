@@ -1,14 +1,12 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Keyboard } from '../component/keyboard/Keyboard';
 import { Grid } from '../component/grid/Grid';
 import { CONFIG } from '../constant/config';
-import { solution, isWinngWord, exportResult, winningWordInfo, wordInfo } from '../lib/words';
+import { isWinngWord, winningWordInfo, wordInfo } from '../lib/words';
 import { useTranslation } from 'react-i18next';
 import { Alert } from '../component/popup/Alert';
-import { Button } from "@headlessui/react";
 import { ResultPopup } from "../component/popup/ResultPopup";
-import { Meaning, Word } from "../lib/wordFromWeb";
 import * as Hangul from 'hangul-js'
 
 const ALERT_TIME_MS = 2000
@@ -96,8 +94,6 @@ export const ProblemPage = () => {
         onEnter={onEnter}
         guesses={guesses}
       />
-
-
       <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} variant="warning" />
       <Alert message={t('length is not meaningful')} isOpen={isNotMeaningful} variant="warning" />
       <ResultPopup isOpen={isGameWon} leftFunction={() => { window.location.href = '/' }} rightFunction={() => { window.location.href = '/problem' }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
