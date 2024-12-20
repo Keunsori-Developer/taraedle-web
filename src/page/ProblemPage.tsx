@@ -20,6 +20,8 @@ export const ProblemPage = () => {
   const [isGameLost, setIsGameLost] = useState(false)
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
   const [isNotMeaningful, setIsNotMeaningful] = useState(false);
+  const [tries, setTries] = useState<number>(6);
+  const [count, setCount] = useState<number>(6);
   const [info, setInfo] = useState<wordInfo>({
     id: '',
     value: '',
@@ -62,6 +64,11 @@ export const ProblemPage = () => {
 
     const winningWord = isWinngWord(currentGuess.join(''))
 
+    const setQuizSetting = () => {
+      setTries(getQuiz().difficulty.maxAttempts);
+      setCount(getQuiz().word.count);
+    }
+
     if (currentGuess.length === CONFIG.wordLength && guesses.length < CONFIG.tries && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
@@ -88,7 +95,7 @@ export const ProblemPage = () => {
 
   return (
     <div>
-      <Grid guesses={guesses} currentGuess={currentGuess}/>
+      <Grid tries={tries } count={count} guesses={guesses} currentGuess={currentGuess}/>
       <Keyboard
         onChar={onChar}
         onDelete={onDelete}

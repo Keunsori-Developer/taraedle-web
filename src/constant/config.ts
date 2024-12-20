@@ -1,8 +1,10 @@
+import { useState } from "react"
+
 // 주요 정보 설정
 
 export const CONFIG = {
     // 문제 풀이 기회
-    tries: 7,
+    tries: 6,
     // 표시되는 언어
     language: 'kr',
     // 글자수
