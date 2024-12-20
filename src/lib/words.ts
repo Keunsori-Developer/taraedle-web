@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { CONFIG } from '../constant/config'
 import apiClient, { getAccessToken, getNewToken } from './auth'
 import { toCharArray } from './stringToCharArray'
-import { Word, WordFromWeb, Meaning, Quiz } from './wordFromWeb'
+import { Meaning, Quiz } from './wordFromWeb'
 
 // const answer: wordInfo = {
 //     id : '1',
@@ -12,7 +12,7 @@ import { Word, WordFromWeb, Meaning, Quiz } from './wordFromWeb'
 //     definitions : [] 
 // }
 
-const answer: wordInfo = await WordFromWeb(6, true, false);
+// const answer: wordInfo = await WordFromWeb(6, true, false);
 // const [answer, setAnswer] = useState<wordInfo | null>(null);
 
 // export const settingQuestion = async (count: number, complexVowel: boolean = false, complexConsonant: boolean = false) => {
@@ -108,8 +108,8 @@ export const exportResult = async (tries: number, isSolved: boolean) => {
 }
 
 export const getAnswer = () => {
-    // return {solution : getQuiz().word.value};
-    return {solution: '테스트'}
+    return {solution : getQuiz().word.value};
+    // return {solution: '테스트'}
 }
 export const { solution } = getAnswer()
 
