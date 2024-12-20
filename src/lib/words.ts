@@ -20,6 +20,14 @@ export const getQuiz = () => {
     }
 }
 
+export const getQuizSetting = () => {
+    if (getQuiz()) {
+        
+        const difficulty = getQuiz().difficulty;
+        return difficulty;
+    }
+}
+
 export const isWinngWord = (word: string) => {
     const charVal = toCharArray(getQuiz().word.value);
     return word === charVal;

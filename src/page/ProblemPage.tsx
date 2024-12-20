@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Keyboard } from '../component/keyboard/Keyboard';
 import { Grid } from '../component/grid/Grid';
 import { CONFIG } from '../constant/config';
-import { getQuiz, isWinngWord, wordInfo } from '../lib/words';
+import { getQuiz, getQuizSetting, isWinngWord, wordInfo } from '../lib/words';
 import { useTranslation } from 'react-i18next';
 import { Alert } from '../component/popup/Alert';
 import { ResultPopup } from "../component/popup/ResultPopup";
@@ -32,6 +32,18 @@ export const ProblemPage = () => {
   const dataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value)
   }
+
+  const quizSetting = getQuizSetting();
+
+  // difficulty: {
+  //   lengthMin: number,
+  //   lengthMax: number,
+  //   countMin: number,
+  //   countMax: number,
+  //   complexVowel: boolean,
+  //   complexConsonant: boolean,
+  //   maxAttempts: number
+  // }
 
   const onChar = (value: string) => {
     if (currentGuess.length < CONFIG.wordLength && guesses.length < CONFIG.tries && !isGameWon) {
@@ -88,7 +100,7 @@ export const ProblemPage = () => {
 
   return (
     <div>
-      <Grid guesses={guesses} currentGuess={currentGuess}/>
+      <Grid tries={quizSetting.count ? quizSetting.count : 6} guesses={guesses} currentGuess={currentGuess}/>
       <Keyboard
         onChar={onChar}
         onDelete={onDelete}

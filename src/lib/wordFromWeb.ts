@@ -13,6 +13,8 @@ export interface Quiz {
   word: {
     value: string,
     definitions: string,
+    length: number,
+    count: number
   },
   difficulty: {
     lengthMin: number,
