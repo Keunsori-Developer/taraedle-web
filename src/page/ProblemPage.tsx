@@ -33,7 +33,7 @@ export const ProblemPage = () => {
     setData(e.target.value)
   }
 
-  const quizSetting = getQuizSetting();
+  // const quizSetting = getQuizSetting();
 
   // difficulty: {
   //   lengthMin: number,
@@ -100,7 +100,7 @@ export const ProblemPage = () => {
 
   return (
     <div>
-      <Grid tries={quizSetting.count ? quizSetting.count : 6} guesses={guesses} currentGuess={currentGuess}/>
+      <Grid guesses={guesses} currentGuess={currentGuess}/>
       <Keyboard
         onChar={onChar}
         onDelete={onDelete}

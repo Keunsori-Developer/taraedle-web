@@ -1,3 +1,4 @@
+import { CONFIG } from '../constant/config'
 import apiClient from './auth'
 
 export interface Word {
@@ -40,12 +41,14 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
   ].filter(Boolean).join('&')
   console.log(queryParams);
   try {
-    const response = await apiClient.get<Word>(
+    const response = await apiClient.get<Quiz>(
       `/word${queryParams ? `?${queryParams}` : ''}`
     )
     const data = response.data;
-    console.log(data.value);
-    const parseDefinitions: Meaning[] = JSON.parse(data.definitions);
+    console.log(data.word.count);
+    const parseDefinitions: Meaning[] = JSON.parse(data.word.definitions);
+    CONFIG.tries = data.difficulty.maxAttempts;
+    CONFIG.wordLength = data.word.count;
     const result = {
       ...data,
       definitions: parseDefinitions
