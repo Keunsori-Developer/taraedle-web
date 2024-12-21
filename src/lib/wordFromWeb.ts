@@ -69,10 +69,10 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
 //   setLevel(level);
 // }
 
-export const getQuiz = async (level: string) => {
+export const getQuiz = async (difficulty: string) => {
   try {
     const response = await apiClient.post<Quiz>(
-      `/quiz`, {level}
+      `/quiz`, {difficulty}
     )
     const data = response.data;
     console.log(`

@@ -12,7 +12,6 @@ interface props {
 export const LevelPopUp = ({ isOpen }: props) => {
     const testLevel = () => {
         getQuiz('EASY');
-        // getQuiz('EASY')
         // window.location.href = '/problem'
     }
     
