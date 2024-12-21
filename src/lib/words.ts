@@ -12,6 +12,17 @@ export interface wordInfo {
     definitions: Meaning[],
 }
 
+const quizData = window.localStorage.getItem('quiz');
+const quizValue = quizData ? JSON.parse(quizData) : null;
+
+export const getQuizSetting = () => {
+    return {
+        tries: quizValue.difficulty.maxAttempts,
+        count: quizValue.word.count
+    };
+}
+
+
 export const getQuiz = () => {
     const quizJson = window.localStorage.getItem('quiz');
     if (quizJson) {
@@ -27,16 +38,8 @@ export const getQuiz = () => {
     }
 }
 
-export const getQuizSetting = () => {
-    if (getQuiz()) {
-        
-        const difficulty = getQuiz().difficulty;
-        return difficulty;
-    }
-}
-
 export const isWinngWord = (word: string) => {
-    const charVal = toCharArray(getQuiz().word.value);
+    const charVal = toCharArray(quizValue.word.value);
     return word === charVal;
 }
 
@@ -44,7 +47,7 @@ export const exportResult = async (tries: number, isSolved: boolean) => {
     try {
         await apiClient.post<any>(
             `/word/solve`, {
-                wordId: getQuiz().uuid,
+                wordId: quizValue.uuid,
                 attempts: tries,
                 isSolved: isSolved
             }
@@ -55,11 +58,12 @@ export const exportResult = async (tries: number, isSolved: boolean) => {
 }
 
 export const getAnswer = () => {
-    if (getQuiz()) {
-        return {solution : getQuiz().word.value};
-    } else {
-        return {solution: ''};
-    }
+    return quizValue
+    // if (getQuiz()) {
+    //     return {solution : getQuiz().word.value};
+    // } else {
+    //     return {solution: ''};
+    // }
     // return {solution: '테스트'}
 }
-export const { solution } = getAnswer()
+export const { solution } = quizValue.word.value;

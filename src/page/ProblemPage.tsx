@@ -20,8 +20,8 @@ const ProblemPage = () => {
   const [isGameLost, setIsGameLost] = useState(false)
   const [isNotEnoughLetters, setIsNotEnoughLetters] = useState(false)
   const [isNotMeaningful, setIsNotMeaningful] = useState(false);
-  const [tries, setTries] = useState<number>(6);
-  const [count, setCount] = useState<number>(6);
+  const [tries, setTries] = useState<number>(getQuizSetting().tries);
+  const [count, setCount] = useState<number>(getQuizSetting().count);
   const [info, setInfo] = useState<wordInfo>({
     id: '',
     value: '',
@@ -33,6 +33,10 @@ const ProblemPage = () => {
   const { t } = useTranslation()
   const dataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value)
+  }
+
+  const setQuizSetting = () => {
+
   }
 
   const onChar = (value: string) => {
