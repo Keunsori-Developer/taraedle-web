@@ -63,13 +63,13 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
   }
 }
 
-const [level, setLevel] = useState<string>('');
+// const [level, setLevel] = useState<string>('');
 
-export const setQuiz = (level: string) => {
-  setLevel(level);
-}
+// export const setQuiz = (level: string) => {
+//   setLevel(level);
+// }
 
-export const getQuiz = async () => {
+export const getQuiz = async (level: string) => {
   try {
     const response = await apiClient.post<Quiz>(
       `/quiz`, {level}

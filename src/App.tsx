@@ -1,9 +1,9 @@
-import React, { lazy } from 'react';
 import './App.css';
+import React, { lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-const ProblemPage = lazy(() => import('./page/ProblemPage'));
 // import { ProblemPage } from './page/ProblemPage';
+const ProblemPage = lazy(() => import('./page/ProblemPage'));
 import { MainPage } from './page/MainPage';
 import { LoginPage } from './page/LoginPage';
 import { CallbackPage } from './page/CallbackPage';
