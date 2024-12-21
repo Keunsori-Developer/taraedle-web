@@ -65,11 +65,6 @@ export const quizSetting = async (difficulty: string) => {
       `/quiz`, {difficulty}
     )
     const data = response.data;
-    console.log(`
-      ${data.word.value}
-      ${data.word.count}
-      ${data.word.length}
-      `)
     const parseDefinitions: Meaning[] = JSON.parse(data.word.definitions);
     const result = {
       ...data,

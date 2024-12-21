@@ -66,7 +66,7 @@ const ProblemPage = () => {
     if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
-      setInfo(quizValue.word)
+      setInfo(quizValue)
 
       if (winningWord) {
         // 데이터 전송 주석
