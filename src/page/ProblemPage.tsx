@@ -23,7 +23,6 @@ const ProblemPage = () => {
   const [tries, setTries] = useState<number>(getQuizSetting().tries);
   const [count, setCount] = useState<number>(getQuizSetting().count);
   const [info, setInfo] = useState<wordInfo>({
-    id: '',
     value: '',
     length: 0,
     count: 0,
@@ -67,7 +66,7 @@ const ProblemPage = () => {
     if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
-      setInfo(quizValue)
+      setInfo(quizValue.word)
 
       if (winningWord) {
         // 데이터 전송 주석

@@ -5,7 +5,6 @@ import { toCharArray } from './stringToCharArray'
 import { Meaning, Quiz } from './wordFromWeb'
 
 export interface wordInfo {
-    id: string,
     value: string,
     length: number,
     count: number,
@@ -32,7 +31,7 @@ export const exportResult = async (tries: number, isSolved: boolean) => {
         await apiClient.post<any>(
             `/quiz/${quizValue.uuid}`, {
                 attempts: tries,
-                isSolved: isSolved
+                solved: isSolved
             }
         )
         console.log('success')
