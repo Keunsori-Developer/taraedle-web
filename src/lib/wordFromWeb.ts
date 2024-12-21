@@ -69,7 +69,7 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
 //   setLevel(level);
 // }
 
-export const getQuiz = async (difficulty: string) => {
+export const quizSetting = async (difficulty: string) => {
   try {
     const response = await apiClient.post<Quiz>(
       `/quiz`, {difficulty}
@@ -85,11 +85,13 @@ export const getQuiz = async (difficulty: string) => {
       ...data,
       definitions: parseDefinitions
     }
-    return result
-    // const quiz = JSON.stringify(result);
-    // window.localStorage.setItem('quiz', quiz);
-    // window.location.href = 'problem';
+    // return result
+    const quiz = JSON.stringify(result);
+    window.localStorage.setItem('quiz', quiz);
+    window.location.href = 'problem';
   } catch (error) {
     throw error
+  // } finally {
+  //   window.location.href = 'problem';
   }
 }

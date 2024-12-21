@@ -1,7 +1,7 @@
 import React from "react";
 import { Transition } from "@headlessui/react";
 import '../style/style.css'
-import { getQuiz } from "../../lib/wordFromWeb";
+import { quizSetting } from "../../lib/wordFromWeb";
 import { CONFIG } from "../../constant/config";
 // import { settingQuestion } from "../../lib/words";
 
@@ -11,7 +11,7 @@ interface props {
 
 export const LevelPopUp = ({ isOpen }: props) => {
     const testLevel = () => {
-        getQuiz('EASY');
+        quizSetting('EASY');
         // window.location.href = '/problem'
     }
     

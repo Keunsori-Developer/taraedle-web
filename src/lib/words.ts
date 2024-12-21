@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import { CONFIG } from '../constant/config'
 import apiClient from './auth'
 import { toCharArray } from './stringToCharArray'
-import { Meaning } from './wordFromWeb'
+import { Meaning, Quiz } from './wordFromWeb'
 
 export interface wordInfo {
     id: string,
