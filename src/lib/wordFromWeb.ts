@@ -49,8 +49,6 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
     const data = response.data;
     console.log(data.word.count);
     const parseDefinitions: Meaning[] = JSON.parse(data.word.definitions);
-    CONFIG.tries = data.difficulty.maxAttempts;
-    CONFIG.wordLength = data.word.count;
     const result = {
       ...data,
       definitions: parseDefinitions

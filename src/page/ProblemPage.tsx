@@ -36,7 +36,7 @@ const ProblemPage = () => {
   }
 
   const onChar = (value: string) => {
-    if (currentGuess.length < CONFIG.wordLength && guesses.length < CONFIG.tries && !isGameWon) {
+    if (currentGuess.length < quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {
       let newGuess = currentGuess.concat([value])
       setCurrentGuess(newGuess)
     }
@@ -47,7 +47,7 @@ const ProblemPage = () => {
       return
     }
 
-    if (!(currentGuess.length === CONFIG.wordLength)) {
+    if (!(currentGuess.length === quizValue.word.count)) {
       setIsNotEnoughLetters(true)
       return setTimeout(() => {
         setIsNotEnoughLetters(false)
@@ -64,7 +64,7 @@ const ProblemPage = () => {
 
     const winningWord = isWinngWord(currentGuess.join(''))
 
-    if (currentGuess.length === CONFIG.wordLength && guesses.length < CONFIG.tries && !isGameWon) {      
+    if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
       setInfo(quizValue)
@@ -75,7 +75,7 @@ const ProblemPage = () => {
         return setIsGameWon(true)
       }
       
-      if (guesses.length == CONFIG.tries - 1) {
+      if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
         // 데이터 전송 주석
         // exportResult(CONFIG.tries - 1, false)
         return setIsGameLost(true)

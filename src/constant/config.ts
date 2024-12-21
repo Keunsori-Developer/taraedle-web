@@ -4,11 +4,9 @@ import { useState } from "react"
 
 export const CONFIG = {
     // 문제 풀이 기회
-    tries: 6,
     // 표시되는 언어
     language: 'kr',
     // 글자수
-    wordLength: 6,
     author: 'author',
     authorWebsite: 'link',
     wordListSource: 'source',
