@@ -13,16 +13,9 @@ export interface wordInfo {
 }
 
 const quizData = window.localStorage.getItem('quiz');
-const quizValue: Quiz = quizData ? JSON.parse(quizData) : null;
+export const quizValue = quizData ? JSON.parse(quizData) : null;
 
 export const getQuizSetting = () => {
-    console.log(`
-        ${quizValue.word.value}
-        ${quizValue.word.count}
-        ${quizValue.word.length}
-        ${quizValue.uuid}
-        ${quizValue.difficulty.maxAttempts}
-        `)
     return {
         tries: quizValue.difficulty.maxAttempts,
         count: quizValue.word.count
@@ -34,13 +27,6 @@ export const getQuiz = () => {
     const quizJson = window.localStorage.getItem('quiz');
     if (quizJson) {
         const quiz = JSON.parse(quizJson);
-        console.log(
-            `
-            word: ${quiz.word.value}
-            count: ${quiz.word.count}
-            attempt: ${quiz.difficulty.maxAttempts}
-            `
-        )
         return quiz;
     }
 }
@@ -66,11 +52,5 @@ export const exportResult = async (tries: number, isSolved: boolean) => {
 
 export const getAnswer = () => {
     return { solution: quizValue.word.value }
-    // if (getQuiz()) {
-    //     return {solution : getQuiz().word.value};
-    // } else {
-    //     return {solution: ''};
-    // }
-    // return {solution: '테스트'}
 }
 export const { solution } = getAnswer();

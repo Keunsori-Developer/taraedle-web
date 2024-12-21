@@ -46,7 +46,6 @@ export const MainPage = () => {
                 }} />
                 : 
                 <Button value="로그인" onClick={() => {
-                    setIsOpen(false);
                     window.open('https://api.randommagic.xyz/auth/login/google', '로그인', 'width=430,height=500,location=no,status=no,scrollbars=yes')
                     }} />
             }

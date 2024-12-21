@@ -3,7 +3,6 @@ import { Transition } from "@headlessui/react";
 import '../style/style.css'
 import { quizSetting } from "../../lib/wordFromWeb";
 import { CONFIG } from "../../constant/config";
-// import { settingQuestion } from "../../lib/words";
 
 interface props {
     isOpen: boolean
@@ -12,7 +11,6 @@ interface props {
 export const LevelPopUp = ({ isOpen }: props) => {
     const testLevel = () => {
         quizSetting('EASY');
-        // window.location.href = '/problem'
     }
     
     return (

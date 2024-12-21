@@ -58,16 +58,8 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
     return result
   } catch (error) {
     throw error
-  } finally {
-    // window.location.href = '/problem'
   }
 }
-
-// const [level, setLevel] = useState<string>('');
-
-// export const setQuiz = (level: string) => {
-//   setLevel(level);
-// }
 
 export const quizSetting = async (difficulty: string) => {
   try {

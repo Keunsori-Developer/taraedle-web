@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Keyboard } from '../component/keyboard/Keyboard';
 import { Grid } from '../component/grid/Grid';
 import { CONFIG } from '../constant/config';
-import { getQuiz, getQuizSetting, isWinngWord, wordInfo } from '../lib/words';
+import { getQuiz, getQuizSetting, isWinngWord, quizValue, wordInfo } from '../lib/words';
 import { useTranslation } from 'react-i18next';
 import { Alert } from '../component/popup/Alert';
 import { ResultPopup } from "../component/popup/ResultPopup";
@@ -33,10 +33,6 @@ const ProblemPage = () => {
   const { t } = useTranslation()
   const dataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value)
-  }
-
-  const setQuizSetting = () => {
-
   }
 
   const onChar = (value: string) => {
@@ -71,7 +67,7 @@ const ProblemPage = () => {
     if (currentGuess.length === CONFIG.wordLength && guesses.length < CONFIG.tries && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
-      setInfo(getQuiz())
+      setInfo(quizValue)
 
       if (winningWord) {
         // 데이터 전송 주석
