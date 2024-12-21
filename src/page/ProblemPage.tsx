@@ -11,7 +11,7 @@ import * as Hangul from 'hangul-js'
 
 const ALERT_TIME_MS = 2000
 
-export const ProblemPage = () => {
+const ProblemPage = () => {
   const [data, setData] = useState<string>('');
   const [value, setValue] = useState<string>('');
   const [guesses, setGuesses] = useState<string[][]>([])
@@ -64,11 +64,6 @@ export const ProblemPage = () => {
 
     const winningWord = isWinngWord(currentGuess.join(''))
 
-    const setQuizSetting = () => {
-      setTries(getQuiz().difficulty.maxAttempts);
-      setCount(getQuiz().word.count);
-    }
-
     if (currentGuess.length === CONFIG.wordLength && guesses.length < CONFIG.tries && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
@@ -109,3 +104,5 @@ export const ProblemPage = () => {
     </div>
   );
 }
+
+export default ProblemPage;

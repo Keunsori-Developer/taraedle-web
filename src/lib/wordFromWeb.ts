@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { CONFIG } from '../constant/config'
 import apiClient from './auth'
 
@@ -33,6 +34,7 @@ export interface Meaning {
   meanings: string[]
 }
 
+
 export const WordFromWeb = async (count?: number, complexVowel?: boolean, complexConsonant?: boolean) => {
   const queryParams = [
     count ? `count=${count}` : ``,
@@ -61,10 +63,16 @@ export const WordFromWeb = async (count?: number, complexVowel?: boolean, comple
   }
 }
 
-export const getQuiz = async (difficulty: string) => {
+const [level, setLevel] = useState<string>('');
+
+export const setQuiz = (level: string) => {
+  setLevel(level);
+}
+
+export const getQuiz = async () => {
   try {
     const response = await apiClient.post<Quiz>(
-      `/quiz`, {difficulty}
+      `/quiz`, {level}
     )
     const data = response.data;
     const parseDefinitions: Meaning[] = JSON.parse(data.word.definitions);
@@ -72,10 +80,10 @@ export const getQuiz = async (difficulty: string) => {
       ...data,
       definitions: parseDefinitions
     }
-    // return result
-    const quiz = JSON.stringify(result);
-    window.localStorage.setItem('quiz', quiz);
-    window.location.href = 'problem';
+    return result
+    // const quiz = JSON.stringify(result);
+    // window.localStorage.setItem('quiz', quiz);
+    // window.location.href = 'problem';
   } catch (error) {
     throw error
   }
