@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Keyboard } from '../component/keyboard/Keyboard';
 import { Grid } from '../component/grid/Grid';
 import { CONFIG } from '../constant/config';
-import { getQuiz, getQuizSetting, isWinngWord, quizValue, wordInfo } from '../lib/words';
+import { exportResult, getQuizSetting, isWinngWord, quizValue, wordInfo } from '../lib/words';
 import { useTranslation } from 'react-i18next';
 import { Alert } from '../component/popup/Alert';
 import { ResultPopup } from "../component/popup/ResultPopup";
@@ -71,13 +71,13 @@ const ProblemPage = () => {
 
       if (winningWord) {
         // 데이터 전송 주석
-        // exportResult(guesses.length + 1, true)
+        exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
       }
       
       if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
         // 데이터 전송 주석
-        // exportResult(CONFIG.tries - 1, false)
+        exportResult(quizValue.difficulty.maxAttempts - 1, false)
         return setIsGameLost(true)
       }
     }

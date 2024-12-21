@@ -22,15 +22,6 @@ export const getQuizSetting = () => {
     };
 }
 
-
-export const getQuiz = () => {
-    const quizJson = window.localStorage.getItem('quiz');
-    if (quizJson) {
-        const quiz = JSON.parse(quizJson);
-        return quiz;
-    }
-}
-
 export const isWinngWord = (word: string) => {
     const charVal = toCharArray(quizValue.word.value);
     return word === charVal;
@@ -39,12 +30,12 @@ export const isWinngWord = (word: string) => {
 export const exportResult = async (tries: number, isSolved: boolean) => {
     try {
         await apiClient.post<any>(
-            `/word/solve`, {
-                wordId: quizValue.uuid,
+            `/quiz/${quizValue.uuid}`, {
                 attempts: tries,
                 isSolved: isSolved
             }
         )
+        console.log('success')
     } catch (error) {
         throw error;
     }
