@@ -2,12 +2,13 @@ import { Cell } from "./Cell";
 import { CONFIG } from "../../constant/config";
 
 type Props = {
+    count: number,
     guess: string[]
 }
 
-export const CurrentRow = ({ guess }: Props) => {
+export const CurrentRow = ({ count, guess }: Props) => {
     const splitGuess = guess
-    const emptyCells = Array.from(Array(CONFIG.wordLength - splitGuess.length))
+    const emptyCells = Array.from(Array(count - splitGuess.length))
 
     return (
         <div className="flex justify-center mb-1">

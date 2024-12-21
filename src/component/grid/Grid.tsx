@@ -20,7 +20,7 @@ export const Grid = ({ tries, count, guesses, currentGuess }: Props) => {
             {guesses.map((guess, i) => (
                 <CompletedRow key={i} guess={guess}/>
             ))}
-            {guesses.length < tries && <CurrentRow guess={currentGuess} />}
+            {guesses.length < tries && <CurrentRow count={count}  guess={currentGuess} />}
             {empties.map((_, i) => (
                 <EmptyRow count={count} key={i}/>
             ))}
