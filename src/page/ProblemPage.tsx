@@ -108,13 +108,15 @@ const ProblemPage = () => {
   return (
     <div>
       <button onClick={popupHandler}>난이도 변경</button>
-      <Grid tries={tries } count={count} guesses={guesses} currentGuess={currentGuess}/>
-      <Keyboard
-        onChar={onChar}
-        onDelete={onDelete}
-        onEnter={onEnter}
-        guesses={guesses}
-      />
+      <div>
+        <Grid tries={tries } count={count} guesses={guesses} currentGuess={currentGuess}/>
+        <Keyboard
+          onChar={onChar}
+          onDelete={onDelete}
+          onEnter={onEnter}
+          guesses={guesses}
+        />
+      </div>
       <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} variant="warning" />
       <Alert message={t('length is not meaningful')} isOpen={isNotMeaningful} variant="warning" />
       <ResultPopup isOpen={isGameWon} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
