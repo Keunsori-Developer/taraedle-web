@@ -98,6 +98,10 @@ apiClient.interceptors.response.use(
             });
         } else if (error.response && error.response.status === 400) {
             const errorCode = error.response.data?.errorCode;
+            console.log(`
+                ${error.response}
+                ${errorCode}
+                `);
             switch (errorCode) {
                 case 'INVALID_WORD':
                     localStorage.setItem('wordError', 'invalid');

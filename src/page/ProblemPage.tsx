@@ -72,7 +72,7 @@ const ProblemPage = () => {
     }
 
     const chkVal = Hangul.assemble(currentGuess);
-    if (!Hangul.isComplete(chkVal) || wordError) {
+    if (!Hangul.isCompleteAll(chkVal) || wordError) {
       setIsNotMeaningful(true)
       return setTimeout(() => {
         setIsNotMeaningful(false)
