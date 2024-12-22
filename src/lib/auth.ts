@@ -103,8 +103,8 @@ apiClient.interceptors.response.use(
                 `);
             switch (errorCode) {
                 case 'INVALID_WORD':
-                    localStorage.setItem('wordError', 'invalid');
-                    return Promise.reject(error);
+                    localStorage.setItem('wordError', 'test');
+                    break;
                 default:
                     break;
             }

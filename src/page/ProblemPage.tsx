@@ -10,6 +10,7 @@ import { ResultPopup } from "../component/popup/ResultPopup";
 import * as Hangul from 'hangul-js'
 import { isAvailableWord, quizSetting } from "../lib/wordFromWeb";
 import { LevelPopUp } from "../component/popup/LevelPopUp";
+import { createContext } from "vm";
 
 const ALERT_TIME_MS = 2000
 
@@ -25,7 +26,6 @@ const ProblemPage = () => {
   const [tries, setTries] = useState<number>(getQuizSetting().tries);
   const [count, setCount] = useState<number>(getQuizSetting().count);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [wordError, setWordError] = useState<boolean>(!!localStorage.getItem('wordError'));
   const [info, setInfo] = useState<wordInfo>({
     value: '',
     length: 0,
@@ -34,19 +34,8 @@ const ProblemPage = () => {
   });
 
   useEffect(() => {
-    console.log('useEffeact')
-    const checkWordError = (event: StorageEvent) => {
-      if (event.key === 'wordError') {
-        setWordError(event.newValue !== null);
-      }
-
-      window.addEventListener('storage', checkWordError);
-
-      return (() => {
-        window.removeEventListener('storage', checkWordError);
-      })
-    }
-  }, []);
+    console.log('useEffect test');
+  }, [localStorage.getItem('wordError')]);
 
   const { t } = useTranslation()
   const dataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -93,13 +82,6 @@ const ProblemPage = () => {
         return setIsGameWon(true)
       } else {
         isAvailableWord(currentGuess.join(''));
-        if (wordError) {
-          setIsNotMeaningful(true)
-          return setTimeout(() => {
-            setIsNotMeaningful(false)
-            localStorage.removeItem('wordError')
-          }, ALERT_TIME_MS);
-        }
       }
       
       if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
