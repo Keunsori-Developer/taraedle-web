@@ -2,13 +2,13 @@ import { useState } from 'react'
 import { CONFIG } from '../constant/config'
 import apiClient from './auth'
 
-export interface Word {
-  id: string,
-  value: string,
-  length: number,
-  count: number,
-  definitions: string,
-}
+// export interface Word {
+//   id: string,
+//   value: string,
+//   length: number,
+//   count: number,
+//   definitions: string,
+// }
 
 export interface Quiz {
   uuid: string,
@@ -34,31 +34,6 @@ export interface Meaning {
   meanings: string[]
 }
 
-
-export const WordFromWeb = async (count?: number, complexVowel?: boolean, complexConsonant?: boolean) => {
-  const queryParams = [
-    count ? `count=${count}` : ``,
-    complexVowel ? `complexVowel=${complexVowel}` : ``,
-    complexConsonant ? `complexConsonant=${complexConsonant}` : ``
-  ].filter(Boolean).join('&')
-  console.log(queryParams);
-  try {
-    const response = await apiClient.get<Quiz>(
-      `/word${queryParams ? `?${queryParams}` : ''}`
-    )
-    const data = response.data;
-    console.log(data.word.count);
-    const parseDefinitions: Meaning[] = JSON.parse(data.word.definitions);
-    const result = {
-      ...data,
-      definitions: parseDefinitions
-    }
-    return result
-  } catch (error) {
-    throw error
-  }
-}
-
 export const quizSetting = async (difficulty: string) => {
   try {
     const response = await apiClient.post<Quiz>(
@@ -76,7 +51,15 @@ export const quizSetting = async (difficulty: string) => {
     window.location.href = 'problem';
   } catch (error) {
     throw error
-  // } finally {
-  //   window.location.href = 'problem';
+  }
+}
+
+export const isAvailableWord = async (word: string) => {
+  try {
+    await apiClient.get(
+      `/word/${word}`
+    )
+  } catch (error) {
+    throw error;
   }
 }

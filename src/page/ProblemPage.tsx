@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert } from '../component/popup/Alert';
 import { ResultPopup } from "../component/popup/ResultPopup";
 import * as Hangul from 'hangul-js'
-import { quizSetting } from "../lib/wordFromWeb";
+import { isAvailableWord, quizSetting } from "../lib/wordFromWeb";
 import { LevelPopUp } from "../component/popup/LevelPopUp";
 
 const ALERT_TIME_MS = 2000
@@ -24,13 +24,28 @@ const ProblemPage = () => {
   const [isNotMeaningful, setIsNotMeaningful] = useState(false);
   const [tries, setTries] = useState<number>(getQuizSetting().tries);
   const [count, setCount] = useState<number>(getQuizSetting().count);
-  const [isOpen, setIsOpen] = useState < boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [wordError, setWordError] = useState<boolean>(!!localStorage.getItem('wordError'));
   const [info, setInfo] = useState<wordInfo>({
     value: '',
     length: 0,
     count: 0,
     definitions: [],
   });
+
+  useEffect(() => {
+    const checkWordError = (event: StorageEvent) => {
+      if (event.key === 'wordError') {
+        setWordError(event.newValue !== null);
+      }
+
+      window.addEventListener('storage', checkWordError);
+
+      return (() => {
+        window.removeEventListener('storage', checkWordError);
+      })
+    }
+  }, []);
 
   const { t } = useTranslation()
   const dataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +72,7 @@ const ProblemPage = () => {
     }
 
     const chkVal = Hangul.assemble(currentGuess);
-    if (!Hangul.isComplete(chkVal)) {
+    if (!Hangul.isComplete(chkVal) || wordError) {
       setIsNotMeaningful(true)
       return setTimeout(() => {
         setIsNotMeaningful(false)
@@ -75,6 +90,11 @@ const ProblemPage = () => {
         // 데이터 전송 주석
         exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
+      } else {
+        isAvailableWord(currentGuess.join(''));
+        if (wordError) {
+          return;
+        }
       }
       
       if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
@@ -118,7 +138,7 @@ const ProblemPage = () => {
         />
       </div>
       <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} variant="warning" />
-      <Alert message={t('length is not meaningful')} isOpen={isNotMeaningful} variant="warning" />
+      <Alert message={t('word is not meaningful')} isOpen={isNotMeaningful} variant="warning" />
       <ResultPopup isOpen={isGameWon} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
       <ResultPopup isOpen={isGameLost} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="오답" info={info} lBtn="메인으로" rBtn="다른문제풀기" />
       

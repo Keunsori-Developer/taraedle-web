@@ -96,6 +96,15 @@ apiClient.interceptors.response.use(
                     isRefreshing = false;
                 }
             });
+        } else if (error.response && error.response.status === 400) {
+            const errorCode = error.response.data?.errorCode;
+            switch (errorCode) {
+                case 'INVALID_WORD':
+                    localStorage.setItem('wordError', 'invalid');
+                    break;
+                default:
+                    break;
+            }
         }
         return Promise.reject(error);
     }
