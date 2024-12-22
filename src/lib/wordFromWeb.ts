@@ -60,7 +60,10 @@ export const isAvailableWord = async (word: string) => {
     await apiClient.get(
       `/word/${word}`
     )
-  } catch (error) {
+  } catch (error: any) {
+    if (error.response && error.response.status === 400) {
+      console.log('error');
+    }
     throw error;
   }
 }
