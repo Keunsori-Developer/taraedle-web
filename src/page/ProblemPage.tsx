@@ -94,7 +94,11 @@ const ProblemPage = () => {
       } else {
         isAvailableWord(currentGuess.join(''));
         if (wordError) {
-          return;
+          setIsNotMeaningful(true)
+          return setTimeout(() => {
+            setIsNotMeaningful(false)
+            localStorage.removeItem('wordError')
+          }, ALERT_TIME_MS);
         }
       }
       
