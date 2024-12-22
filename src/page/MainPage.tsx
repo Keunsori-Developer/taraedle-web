@@ -8,8 +8,8 @@ export const MainPage = () => {
     const [isLogin, setIsLogin] = useState<boolean>(false)
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const openHandler = () => {
-        setIsOpen(true);
+    const popupHandler = () => {
+        setIsOpen(!isOpen);
     }
 
     useEffect(() => {
@@ -37,7 +37,7 @@ export const MainPage = () => {
     return (
         <div>
             <img style={{ margin: '100px auto 100px auto' }} src={titleImg} />
-            <Button value="게임시작" onClick={openHandler} />
+            <Button value="게임시작" onClick={popupHandler} />
             {/* <Button value="챌린지" onClick={openHandler}/> */}
             <Button value="설정" onClick={() => { }} />
             {isLogin ?
@@ -50,7 +50,7 @@ export const MainPage = () => {
                     }} />
             }
 
-            <LevelPopUp isOpen={isOpen}/>
+            <LevelPopUp isOpen={isOpen} isClose={popupHandler}/>
         </div>
     )
 }

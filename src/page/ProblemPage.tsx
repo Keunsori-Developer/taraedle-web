@@ -8,6 +8,8 @@ import { useTranslation } from 'react-i18next';
 import { Alert } from '../component/popup/Alert';
 import { ResultPopup } from "../component/popup/ResultPopup";
 import * as Hangul from 'hangul-js'
+import { quizSetting } from "../lib/wordFromWeb";
+import { LevelPopUp } from "../component/popup/LevelPopUp";
 
 const ALERT_TIME_MS = 2000
 
@@ -22,6 +24,7 @@ const ProblemPage = () => {
   const [isNotMeaningful, setIsNotMeaningful] = useState(false);
   const [tries, setTries] = useState<number>(getQuizSetting().tries);
   const [count, setCount] = useState<number>(getQuizSetting().count);
+  const [isOpen, setIsOpen] = useState < boolean>(false);
   const [info, setInfo] = useState<wordInfo>({
     value: '',
     length: 0,
@@ -87,8 +90,24 @@ const ProblemPage = () => {
     setCurrentGuess(currentGuess.slice(0, -1))
   }
 
+  const goMainPage = () => {
+    window.location.href = '/';
+  }
+
+  const goNextQuiz = () => {
+    const difficulty = localStorage.getItem('difficulty');
+    if (difficulty) {
+      quizSetting(difficulty);
+    }
+  }
+
+  const popupHandler = () => {
+    setIsOpen(!isOpen);
+  }
+
   return (
     <div>
+      <button onClick={popupHandler}>설정</button>
       <Grid tries={tries } count={count} guesses={guesses} currentGuess={currentGuess}/>
       <Keyboard
         onChar={onChar}
@@ -98,8 +117,10 @@ const ProblemPage = () => {
       />
       <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} variant="warning" />
       <Alert message={t('length is not meaningful')} isOpen={isNotMeaningful} variant="warning" />
-      <ResultPopup isOpen={isGameWon} leftFunction={() => { window.location.href = '/' }} rightFunction={() => { window.location.href = '/problem' }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
-      <ResultPopup isOpen={isGameLost} leftFunction={() => { window.location.href = '/' }} rightFunction={() => { window.location.href = '/problem' }} title="오답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
+      <ResultPopup isOpen={isGameWon} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
+      <ResultPopup isOpen={isGameLost} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="오답" info={info} lBtn="메인으로" rBtn="다른문제풀기" />
+      
+      <LevelPopUp isOpen={isOpen} isClose={popupHandler}/>
     </div>
   );
 }
