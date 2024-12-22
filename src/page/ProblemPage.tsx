@@ -34,6 +34,7 @@ const ProblemPage = () => {
   });
 
   useEffect(() => {
+    console.log('useEffeact')
     const checkWordError = (event: StorageEvent) => {
       if (event.key === 'wordError') {
         setWordError(event.newValue !== null);
