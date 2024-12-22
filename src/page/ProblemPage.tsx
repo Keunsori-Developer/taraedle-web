@@ -107,7 +107,7 @@ const ProblemPage = () => {
 
   return (
     <div>
-      <button onClick={popupHandler}>설정</button>
+      <button onClick={popupHandler}>난이도 변경</button>
       <Grid tries={tries } count={count} guesses={guesses} currentGuess={currentGuess}/>
       <Keyboard
         onChar={onChar}
