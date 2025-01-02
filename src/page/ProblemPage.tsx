@@ -64,28 +64,30 @@ const ProblemPage = () => {
     }
 
     const winningWord = isWinngWord(currentGuess.join(''))
-    isAvailableWord(currentGuess.join('')).catch((error) => {
+    isAvailableWord(currentGuess.join('')).then(() => {
+      if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
+        setGuesses([...guesses, currentGuess])
+        setCurrentGuess([]) 
+        setInfo(quizValue.word)
+        
+        if (winningWord) {
+          // 데이터 전송 주석
+          exportResult(guesses.length + 1, true)
+          return setIsGameWon(true)
+        }
+        
+        if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
+          // 데이터 전송 주석
+          exportResult(quizValue.difficulty.maxAttempts - 1, false)
+          return setIsGameLost(true)
+        }
+      }
+    }
+    ).catch((error) => {
       errMsgUp()
       return;
     });
 
-    if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
-      setGuesses([...guesses, currentGuess])
-      setCurrentGuess([]) 
-      setInfo(quizValue.word)
-      
-      if (winningWord) {
-        // 데이터 전송 주석
-        exportResult(guesses.length + 1, true)
-        return setIsGameWon(true)
-      }
-      
-      if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
-        // 데이터 전송 주석
-        exportResult(quizValue.difficulty.maxAttempts - 1, false)
-        return setIsGameLost(true)
-      }
-    }
   }
 
   const errMsgUp = () => {
