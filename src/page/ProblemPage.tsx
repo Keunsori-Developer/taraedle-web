@@ -79,7 +79,9 @@ const ProblemPage = () => {
       } else {
         isAvailableWord(currentGuess.join(''), setIsNotMeaningful);
         if (isNotMeaningful) {
-          return;
+          return setTimeout(() => {
+            setIsNotMeaningful(false)
+          }, ALERT_TIME_MS);
         }
       }
       
