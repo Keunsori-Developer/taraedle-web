@@ -77,9 +77,8 @@ const ProblemPage = () => {
         exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
       } else {
-        try { 
-          isAvailableWord(currentGuess.join(''), setIsNotMeaningful);
-        } catch (error) {
+        isAvailableWord(currentGuess.join(''), setIsNotMeaningful);
+        if (isNotMeaningful) {
           return;
         }
       }
