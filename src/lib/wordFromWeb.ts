@@ -44,7 +44,10 @@ export const quizSetting = async (difficulty: string) => {
     const parseDefinitions: Meaning[] = JSON.parse(data.word.definitions);
     const result = {
       ...data,
-      definitions: parseDefinitions
+      word: {
+        ...data.word,
+        definitions: parseDefinitions
+      }
     }
     const quiz = JSON.stringify(result);
     window.localStorage.setItem('quiz', quiz);
