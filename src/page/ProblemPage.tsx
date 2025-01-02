@@ -64,9 +64,13 @@ const ProblemPage = () => {
     }
 
     const winningWord = isWinngWord(currentGuess.join(''))
-    isAvailableWord(currentGuess.join(''), errMsgUp);
+    isAvailableWord(currentGuess.join('')).then((data) => {
+      if (data === 'error') {
+        return;
+      }
+    });
 
-    if (!isNotMeaningful && currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
+    if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
       setInfo(quizValue.word)

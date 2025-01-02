@@ -58,14 +58,14 @@ export const quizSetting = async (difficulty: string) => {
 }
 
 
-export const isAvailableWord = async (word: string, setErr: () => void) => {
+export const isAvailableWord = async (word: string) => {
   try {
     await apiClient.get(
       `/word/${word}`
     )
   } catch (error: any) {
     if (error.response && error.response.status === 400) {
-      setErr();
+      return 'error';
     }
     throw error;
   }
