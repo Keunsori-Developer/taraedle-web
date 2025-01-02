@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Alert } from '../component/popup/Alert';
 import { ResultPopup } from "../component/popup/ResultPopup";
 import * as Hangul from 'hangul-js'
-import { isAvailableWord, quizSetting } from "../lib/wordFromWeb";
+import { isAvailableWord, Meaning, quizSetting } from "../lib/wordFromWeb";
 import { LevelPopUp } from "../component/popup/LevelPopUp";
 import { createContext } from "vm";
 
@@ -74,7 +74,7 @@ const ProblemPage = () => {
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
       setInfo(quizValue.word)
-      const definitions = JSON.parse(quizValue.word.definitions);
+      const definitions: Meaning[] = JSON.parse(quizValue.word.definitions);
       info.definitions = definitions;
 
       if (winningWord) {
