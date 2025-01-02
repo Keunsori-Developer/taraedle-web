@@ -34,7 +34,6 @@ const ProblemPage = () => {
   });
 
   useEffect(() => {
-    console.log('useEffect test');
   }, [localStorage.getItem('wordError')]);
 
   const { t } = useTranslation()
@@ -74,8 +73,9 @@ const ProblemPage = () => {
     if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
-      console.log(quizValue.word);
       setInfo(quizValue.word)
+      const definitions = JSON.parse(quizValue.word.definitions);
+      info.definitions = definitions;
 
       if (winningWord) {
         // 데이터 전송 주석

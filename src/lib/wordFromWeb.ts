@@ -46,8 +46,6 @@ export const quizSetting = async (difficulty: string) => {
       ...data,
       definitions: parseDefinitions
     }
-    console.log(result);
-    // return result
     const quiz = JSON.stringify(result);
     window.localStorage.setItem('quiz', quiz);
     window.location.href = 'problem';
