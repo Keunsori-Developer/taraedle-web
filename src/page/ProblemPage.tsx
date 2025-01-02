@@ -73,9 +73,10 @@ const ProblemPage = () => {
     if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
-      setInfo(quizValue.word)
-      const definitions: Meaning[] = JSON.parse(quizValue.word.definitions);
-      info.definitions = definitions;
+      // setInfo(quizValue.word)
+      // const definitions: Meaning[] = JSON.parse(quizValue.word.definitions);
+      // info.definitions = definitions;
+      setInfo(quizValue);
 
       if (winningWord) {
         // 데이터 전송 주석
