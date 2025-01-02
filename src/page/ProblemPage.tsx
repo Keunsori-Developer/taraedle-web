@@ -52,7 +52,7 @@ const ProblemPage = () => {
     }
   }
 
-  const onEnter = () => {
+  const onEnter = async () => {
     if (isGameWon || isGameLost) {
       return
     }
@@ -84,7 +84,11 @@ const ProblemPage = () => {
         exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
       } else {
-        isAvailableWord(currentGuess.join(''));
+        const msg = await isAvailableWord(currentGuess.join(''));
+        if (msg === 'error') {
+          setIsNotMeaningful(true);
+          return;
+        }
       }
       
       if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
