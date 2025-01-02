@@ -74,6 +74,7 @@ const ProblemPage = () => {
     if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
+      console.log(quizValue.word);
       setInfo(quizValue.word)
 
       if (winningWord) {
