@@ -59,10 +59,7 @@ const ProblemPage = () => {
 
     const chkVal = Hangul.assemble(currentGuess);
     if (!Hangul.isCompleteAll(chkVal)) {
-      setIsNotMeaningful(true)
-      return setTimeout(() => {
-        setIsNotMeaningful(false)
-      }, ALERT_TIME_MS);
+      errMsgUp()
     }
 
     const winningWord = isWinngWord(currentGuess.join(''))
@@ -77,12 +74,7 @@ const ProblemPage = () => {
         exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
       } else {
-        isAvailableWord(currentGuess.join(''), setIsNotMeaningful);
-        if (isNotMeaningful) {
-          return setTimeout(() => {
-            setIsNotMeaningful(false)
-          }, ALERT_TIME_MS);
-        }
+        isAvailableWord(currentGuess.join(''), errMsgUp);
       }
       
       if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
@@ -93,6 +85,12 @@ const ProblemPage = () => {
     }
   }
 
+  const errMsgUp = () => {
+    setIsNotMeaningful(true)
+      return setTimeout(() => {
+        setIsNotMeaningful(false)
+      }, ALERT_TIME_MS);
+  }
 
   const onDelete = () => {
     setCurrentGuess(currentGuess.slice(0, -1))
