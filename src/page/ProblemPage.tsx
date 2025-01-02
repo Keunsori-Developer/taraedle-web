@@ -65,6 +65,7 @@ const ProblemPage = () => {
 
     const winningWord = isWinngWord(currentGuess.join(''))
     isAvailableWord(currentGuess.join('')).then((data) => {
+      console.log(data)
       if (data === 'error') {
         return;
       }
