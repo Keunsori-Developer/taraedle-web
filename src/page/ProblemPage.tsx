@@ -60,12 +60,13 @@ const ProblemPage = () => {
     const chkVal = Hangul.assemble(currentGuess);
     if (!Hangul.isCompleteAll(chkVal)) {
       errMsgUp()
+      return;
     }
 
     const winningWord = isWinngWord(currentGuess.join(''))
     isAvailableWord(currentGuess.join(''), errMsgUp);
 
-    if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
+    if (!isNotMeaningful && currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
       setInfo(quizValue.word)
