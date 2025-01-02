@@ -64,12 +64,9 @@ const ProblemPage = () => {
     }
 
     const winningWord = isWinngWord(currentGuess.join(''))
-    isAvailableWord(currentGuess.join('')).catch((data) => {
-      console.log(data)
-      if (data) {
-        errMsgUp()
-        return;
-      }
+    isAvailableWord(currentGuess.join('')).catch((error) => {
+      errMsgUp()
+      return;
     });
 
     if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      

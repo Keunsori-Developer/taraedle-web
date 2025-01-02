@@ -65,7 +65,7 @@ export const isAvailableWord = async (word: string) => {
     )
   } catch (error: any) {
     if (error.response && error.response.status === 400) {
-      return 'error';
+      throw error;
     }
     throw error;
   }
