@@ -64,7 +64,7 @@ const ProblemPage = () => {
     }
 
     const winningWord = isWinngWord(currentGuess.join(''))
-    isAvailableWord(currentGuess.join('')).then((data) => {
+    isAvailableWord(currentGuess.join('')).catch((data) => {
       console.log(data)
       if (data) {
         errMsgUp()
