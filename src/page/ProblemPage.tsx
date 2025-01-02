@@ -63,6 +63,7 @@ const ProblemPage = () => {
     }
 
     const winningWord = isWinngWord(currentGuess.join(''))
+    isAvailableWord(currentGuess.join(''), errMsgUp);
 
     if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
       setGuesses([...guesses, currentGuess])
@@ -73,8 +74,6 @@ const ProblemPage = () => {
         // 데이터 전송 주석
         exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
-      } else {
-        isAvailableWord(currentGuess.join(''), errMsgUp);
       }
       
       if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
