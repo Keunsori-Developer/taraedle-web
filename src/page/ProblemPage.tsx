@@ -77,7 +77,11 @@ const ProblemPage = () => {
         exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
       } else {
-        isAvailableWord(currentGuess.join(''), setIsNotMeaningful);
+        try { 
+          isAvailableWord(currentGuess.join(''), setIsNotMeaningful);
+        } catch (error) {
+          return;
+        }
       }
       
       if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
