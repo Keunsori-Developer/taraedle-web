@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { CONFIG } from '../constant/config'
 import apiClient from './auth'
 import { toCharArray } from './stringToCharArray'
-import { Meaning, Quiz } from './wordFromWeb'
+import { Meaning } from './wordFromWeb'
 
 export interface wordInfo {
     value: string,
@@ -34,7 +34,6 @@ export const exportResult = async (tries: number, isSolved: boolean) => {
                 solved: isSolved
             }
         )
-        console.log('success')
     } catch (error) {
         throw error;
     }

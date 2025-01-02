@@ -34,6 +34,10 @@ const ProblemPage = () => {
   });
 
   useEffect(() => {
+    console.log('check error');
+    if (localStorage.getItem('wordError')) {
+      setIsNotMeaningful(true);
+    }
   }, [localStorage.getItem('wordError')]);
 
   const { t } = useTranslation()
@@ -74,10 +78,7 @@ const ProblemPage = () => {
       setGuesses([...guesses, currentGuess])
       setCurrentGuess([]) 
       setInfo(quizValue.word)
-      // const definitions: Meaning[] = JSON.parse(quizValue.word.definitions);
-      // info.definitions = definitions;
-      // setInfo(quizValue);
-
+      
       if (winningWord) {
         // 데이터 전송 주석
         exportResult(guesses.length + 1, true)
