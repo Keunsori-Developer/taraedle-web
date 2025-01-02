@@ -33,13 +33,6 @@ const ProblemPage = () => {
     definitions: [],
   });
 
-  useEffect(() => {
-    console.log('check error');
-    if (localStorage.getItem('wordError')) {
-      setIsNotMeaningful(true);
-    }
-  }, [localStorage.getItem('wordError')]);
-
   const { t } = useTranslation()
   const dataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData(e.target.value)
@@ -52,7 +45,7 @@ const ProblemPage = () => {
     }
   }
 
-  const onEnter = async () => {
+  const onEnter = () => {
     if (isGameWon || isGameLost) {
       return
     }
@@ -84,11 +77,7 @@ const ProblemPage = () => {
         exportResult(guesses.length + 1, true)
         return setIsGameWon(true)
       } else {
-        const msg = await isAvailableWord(currentGuess.join(''));
-        if (msg === 'error') {
-          setIsNotMeaningful(true);
-          return;
-        }
+        isAvailableWord(currentGuess.join(''), setIsNotMeaningful);
       }
       
       if (guesses.length == quizValue.difficulty.maxAttempts - 1) {

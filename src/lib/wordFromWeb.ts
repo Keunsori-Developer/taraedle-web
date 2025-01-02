@@ -57,16 +57,15 @@ export const quizSetting = async (difficulty: string) => {
   }
 }
 
-export const isAvailableWord = async (word: string) => {
+
+export const isAvailableWord = async (word: string, setErr: React.Dispatch<React.SetStateAction<boolean>>) => {
   try {
     await apiClient.get(
       `/word/${word}`
     )
   } catch (error: any) {
     if (error.response && error.response.status === 400) {
-      console.log('error');
-      // localStorage.setItem('wordError', 'error');
-      return 'error';
+      setErr(true);
     }
     throw error;
   }
