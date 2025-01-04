@@ -27,11 +27,31 @@ export const LevelPopUp = ({ isOpen, isClose }: props) => {
             leaveTo="opacity-0"
         >
             <div className="resultBox">
-                <button onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'EASY'}>쉬움</button>
-                <button onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'MEDIUM'}>보통</button>
-                <button onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'HARD'}>어려움</button>
-                <button onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'VERYHARD'}>매우 어려움</button>
-                <button onClick={() => { isClose() }}>닫기</button>
+                <button className="select" onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'EASY'}>
+                    <h1 style={{fontSize: '1.2rem'}}>
+                        쉬움
+                    </h1>
+                    2~3글자, 4~6개 자모음, 복합자모음 없음, 최대 6번 시도
+                </button>
+                <button className="select" onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'MEDIUM'}>
+                    <h1 style={{fontSize: '1.2rem'}}>
+                        보통
+                    </h1>
+                    2~3글자, 6~9개 자모음, 복합자모음 랜덤, 최대 6번 시도
+                </button>
+                <button className="select" onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'HARD'}>
+                    <h1 style={{fontSize: '1.2rem'}}>
+                        어려움
+                    </h1>
+                    3~3글자, 7~11개 자모음, 복합자모음 랜덤, 최대 6번 시도
+                </button>
+                <button className="select" onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'VERYHARD'}>
+                    <h1 style={{fontSize: '1.2rem'}}>
+                        매우 어려움
+                    </h1>
+                    3~4글자, 8~16개 자모음, 복합자모음 랜덤, 최대 6번 시도
+                </button>
+                <button className="select" onClick={() => { isClose() }}>닫기</button>
             </div>
         </Transition>
     )
