@@ -19,15 +19,15 @@
     color: black;
 }
 
-.bg-absent.key{
+.bg-absent{
     background-color: #999999;
 }
 
-.bg-correct.key{
+.bg-correct{
     background-color: #658C5E;
 }
 
-.bg-present.key{
+.bg-present{
     background-color: #C0994E;
 }
 
@@ -89,4 +89,14 @@
 button:hover{
     background-color: white;
     filter: brightness(0.9)
+}
+
+.gameGuide{
+    border: 4px solid black;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
 }

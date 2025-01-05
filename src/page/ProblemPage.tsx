@@ -117,8 +117,11 @@ const ProblemPage = () => {
   }
 
   return (
-    <div>
-      <button onClick={popupHandler}>난이도 변경</button>
+    <div style={{display: 'inline-block', width: 'fit-content'}}>
+      {/* <button onClick={popupHandler}>난이도 변경</button> */}
+      <div style={{width: '100%', marginTop: '1rem', textAlign: 'right'}}>
+        <button className="gameGuide">?</button>
+      </div>
       <div>
         <Grid tries={tries } count={count} guesses={guesses} currentGuess={currentGuess}/>
         <Keyboard

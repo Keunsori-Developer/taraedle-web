@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { CONFIG } from '../constant/config'
 import apiClient from './auth'
 import { toCharArray } from './stringToCharArray'
-import { Meaning } from './wordFromWeb'
+import { Meaning, Quiz } from './wordFromWeb'
 
 export interface wordInfo {
     value: string,
@@ -12,7 +12,27 @@ export interface wordInfo {
 }
 
 const quizData = window.localStorage.getItem('quiz');
-export const quizValue = quizData ? JSON.parse(quizData) : null;
+
+const dummyData: Quiz = {
+    uuid: "string",
+    word: {
+        value: "테스트",
+        definitions: "string",
+        length: 6,
+        count: 6
+    },
+    difficulty: {
+        lengthMin: 6,
+        lengthMax: 6,
+        countMin: 6,
+        countMax: 6,
+        complexVowel: true,
+        complexConsonant: false,
+        maxAttempts: 6
+    }
+}
+
+export const quizValue = quizData ? JSON.parse(quizData) : dummyData;
 
 export const getQuizSetting = () => {
     return {
