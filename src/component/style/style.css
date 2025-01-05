@@ -85,3 +85,8 @@
     padding: 2px;
     width: 98%;
 }
+
+button:hover{
+    background-color: white;
+    filter: brightness(0.9)
+}
