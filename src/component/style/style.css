@@ -11,7 +11,7 @@
 }
 
 .key{
-    color: white;
+    color: #ffffff;
 }
 
 .bg-default.key{
@@ -19,19 +19,19 @@
     color: black;
 }
 
-.bg-absent{
+.bg-absent.key{
     background-color: #999999;
 }
 
-.bg-correct{
+.bg-correct.key{
     background-color: #658C5E;
 }
 
-.bg-present{
+.bg-present.key{
     background-color: #C0994E;
 }
 
-.resultBox{
+.infoBox{
     position: fixed;
     top: 5rem;
     left: 50%;
@@ -99,4 +99,9 @@ button:hover{
     height: 2rem;
     margin-right: 1rem;
     margin-bottom: 1rem;
+}
+
+.fit{
+    display: inline-block;
+    width: fit-content;
 }

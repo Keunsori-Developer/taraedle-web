@@ -11,6 +11,7 @@ import * as Hangul from 'hangul-js'
 import { isAvailableWord, Meaning, quizSetting } from "../lib/wordFromWeb";
 import { LevelPopUp } from "../component/popup/LevelPopUp";
 import { createContext } from "vm";
+import { Guide } from "../component/popup/Guide";
 
 const ALERT_TIME_MS = 2000
 
@@ -117,10 +118,10 @@ const ProblemPage = () => {
   }
 
   return (
-    <div style={{display: 'inline-block', width: 'fit-content'}}>
+    <div className="fit">
       {/* <button onClick={popupHandler}>난이도 변경</button> */}
       <div style={{width: '100%', marginTop: '1rem', textAlign: 'right'}}>
-        <button className="gameGuide">?</button>
+        <button className="gameGuide" onClick={popupHandler}>?</button>
       </div>
       <div>
         <Grid tries={tries } count={count} guesses={guesses} currentGuess={currentGuess}/>
@@ -131,12 +132,13 @@ const ProblemPage = () => {
           guesses={guesses}
         />
       </div>
-      <Alert message={t('length is not enough')} isOpen={isNotEnoughLetters} variant="warning" />
-      <Alert message={t('word is not meaningful')} isOpen={isNotMeaningful} variant="warning" />
+      <Alert message={t('단어의 길이가 부족해요.')} isOpen={isNotEnoughLetters} variant="warning" />
+      <Alert message={t('존재하지 않는 단어에요.')} isOpen={isNotMeaningful} variant="warning" />
+      <Guide isOpen={isOpen} isClose={popupHandler}></Guide>
       <ResultPopup isOpen={isGameWon} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
       <ResultPopup isOpen={isGameLost} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="오답" info={info} lBtn="메인으로" rBtn="다른문제풀기" />
       
-      <LevelPopUp isOpen={isOpen} isClose={popupHandler}/>
+      {/* <LevelPopUp isOpen={isOpen} isClose={popupHandler}/> */}
     </div>
   );
 }

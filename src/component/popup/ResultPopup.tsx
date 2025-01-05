@@ -33,7 +33,7 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
         >
-            <div className="resultBox">
+            <div className="infoBox">
                 <span className={titleStyle}>{title}</span>
                 {title === '정답' ? <img src={successImage} className="successImg"/> : <br/>}
                 {info.value}<br/>
