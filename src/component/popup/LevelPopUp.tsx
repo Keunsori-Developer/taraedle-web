@@ -26,7 +26,7 @@ export const LevelPopUp = ({ isOpen, isClose }: props) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
         >
-            <div className="resultBox">
+            <div className="infoBox">
                 <button className="select" onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'EASY'}>
                     <h1 style={{fontSize: '1.2rem'}}>
                         쉬움
