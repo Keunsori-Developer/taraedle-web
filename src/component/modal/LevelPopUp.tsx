@@ -3,9 +3,9 @@ import { Transition } from "@headlessui/react";
 import '../style/style.css'
 import { quizSetting } from "../../lib/wordFromWeb";
 import { CONFIG } from "../../constant/config";
-import { modal } from "../../constant/type";
+import { Modal } from "../../constant/type";
 
-export const LevelPopUp = ({ isOpen, isClose }: modal) => {
+export const LevelPopUp = ({ isOpen, isClose }: Modal) => {
     const selectQuiz = (value: string) => {
         localStorage.setItem('difficulty', value);
         isClose();

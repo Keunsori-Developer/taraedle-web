@@ -3,9 +3,9 @@ import '../style/style.css'
 import ex1 from '../../asset/ex1.png'
 import ex2 from '../../asset/ex2.png'
 import ex3 from '../../asset/ex3.png'
-import { modal } from "../../constant/type";
+import { Modal } from "../../constant/type";
 
-export const Guide = ({ isOpen, isClose }: modal) => {
+export const Guide = ({ isOpen, isClose }: Modal) => {
     
     return (
         <Transition
