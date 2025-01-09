@@ -1,6 +1,7 @@
 import { Transition } from "@headlessui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getStatistic } from "../../lib/auth";
+import { StatusInfo } from "../../constant/type";
 
 interface props {
     isOpen: boolean,
@@ -8,7 +9,22 @@ interface props {
 }
 
 const Statistic = ({ isOpen, isClose }: props) => {
-    const value = getStatistic();
+    const [status, setStatus] = useState<StatusInfo>({});
+
+    useEffect(() => {
+        console.log('token check');
+        getStatistic();
+    }, [localStorage.getItem('accesToken')]);
+    
+    useEffect(() => {
+        const data = localStorage.getItem('statusInfo');
+        if (data) {
+            const statInfo = JSON.parse(data);
+            setStatus(statInfo)
+            console.log(statInfo);
+        }
+    }, [localStorage.getItem('statusInfo')])
+
     return (
         <Transition
             show={isOpen}

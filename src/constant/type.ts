@@ -1,12 +1,12 @@
-export interface Statistic{
-    solveCount: number,
-    lastSolve: string,
-    solveStreak: number,
-    detailedStats: {
-        EASY: SolveLevelCount,
-        MEDIUM: SolveLevelCount,
-        HARD: SolveLevelCount,
-        VERYHARD: SolveLevelCount
+export interface StatusInfo{
+    solveCount?: number,
+    lastSolve?: string,
+    solveStreak?: number,
+    detailedStats?: {
+        EASY?: SolveLevelCount,
+        MEDIUM?: SolveLevelCount,
+        HARD?: SolveLevelCount,
+        VERYHARD?: SolveLevelCount
     }
 }
 
