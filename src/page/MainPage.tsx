@@ -15,7 +15,7 @@ export const MainPage = () => {
     }
 
     const statHandler = () => {
-        setIsStatOpen(!setIsStatOpen);
+        setIsStatOpen(!isStatOpen);
     }
 
     useEffect(() => {
