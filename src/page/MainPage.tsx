@@ -51,7 +51,7 @@ export const MainPage = () => {
                     <Button value="로그아웃" onClick={() => { 
                         Logout()
                     }} />
-                    <Button value="통계보기" onClick={() => {}}/>
+                    <Button value="통계보기" onClick={() => {statHandler}}/>
                 </>
                 : 
                 <Button value="로그인" onClick={() => {
