@@ -1,4 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { Statistic } from "../constant/type";
 
 interface user {
     id: string,
@@ -15,31 +16,6 @@ interface loginToken {
 interface newToken{
     accessToken: string,
     refreshToken: string
-}
-
-interface statistic{
-    solveCount: number,
-    lastSolve: string,
-    solveStreak: number,
-    detailedStats: {
-        EASY: solveLevelCount,
-        MEDIUM: solveLevelCount,
-        HARD: solveLevelCount,
-        VERYHARD: solveLevelCount
-    }
-}
-
-interface solveLevelCount{
-    totalSolved: number,
-    averageAttempts: number,
-    attempCounts: {
-        "1": number,
-        "2": number,
-        "3": number,
-        "4": number,
-        "5": number,
-        "6": number
-    }
 }
 
 export const getAccessToken = () : string | null => {
@@ -174,7 +150,7 @@ export const getNewToken = async () => {
 
 export const getStatistic = async () => {
     try {
-        const response = await apiClient.get<statistic>(
+        const response = await apiClient.get<Statistic>(
             `/user/stat`
         )
         const data = response.data;

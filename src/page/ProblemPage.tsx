@@ -3,15 +3,16 @@ import { useState } from 'react';
 import { Keyboard } from '../component/keyboard/Keyboard';
 import { Grid } from '../component/grid/Grid';
 import { CONFIG } from '../constant/config';
-import { exportResult, getQuizSetting, isWinngWord, quizValue, wordInfo } from '../lib/words';
+import { exportResult, getQuizSetting, isWinngWord, quizValue } from '../lib/words';
 import { useTranslation } from 'react-i18next';
 import { Alert } from '../component/modal/Alert';
 import { ResultPopup } from "../component/modal/ResultPopup";
 import * as Hangul from 'hangul-js'
-import { isAvailableWord, Meaning, quizSetting } from "../lib/wordFromWeb";
+import { isAvailableWord, quizSetting } from "../lib/wordFromWeb";
 import { LevelPopUp } from "../component/modal/LevelPopUp";
 import { createContext } from "vm";
 import { Guide } from "../component/modal/Guide";
+import { WordInfo, Meaning } from "../constant/type";
 
 const ALERT_TIME_MS = 2000
 
@@ -27,7 +28,7 @@ const ProblemPage = () => {
   const [tries, setTries] = useState<number>(getQuizSetting().tries);
   const [count, setCount] = useState<number>(getQuizSetting().count);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [info, setInfo] = useState<wordInfo>({
+  const [info, setInfo] = useState<WordInfo>({
     value: '',
     length: 0,
     count: 0,

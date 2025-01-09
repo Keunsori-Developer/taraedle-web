@@ -2,38 +2,7 @@ import { useState } from 'react'
 import { CONFIG } from '../constant/config'
 import apiClient from './auth'
 import { createContext } from 'vm'
-
-// export interface Word {
-//   id: string,
-//   value: string,
-//   length: number,
-//   count: number,
-//   definitions: string,
-// }
-
-export interface Quiz {
-  uuid: string,
-  word: {
-    value: string,
-    definitions: string,
-    length: number,
-    count: number
-  },
-  difficulty: {
-    lengthMin: number,
-    lengthMax: number,
-    countMin: number,
-    countMax: number,
-    complexVowel: boolean,
-    complexConsonant: boolean,
-    maxAttempts: number
-  }
-}
-
-export interface Meaning {
-  pos: string,
-  meanings: string[]
-}
+import { Quiz, Meaning } from '../constant/type'
 
 export const quizSetting = async (difficulty: string) => {
   try {

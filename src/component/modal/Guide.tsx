@@ -3,13 +3,9 @@ import '../style/style.css'
 import ex1 from '../../asset/ex1.png'
 import ex2 from '../../asset/ex2.png'
 import ex3 from '../../asset/ex3.png'
+import { modal } from "../../constant/type";
 
-interface props {
-    isOpen: boolean,
-    isClose: () => void
-}
-
-export const Guide = ({ isOpen, isClose }: props) => {
+export const Guide = ({ isOpen, isClose }: modal) => {
     
     return (
         <Transition

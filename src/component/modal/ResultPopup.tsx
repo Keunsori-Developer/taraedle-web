@@ -2,14 +2,14 @@ import { Transition } from "@headlessui/react";
 import classNames from "classnames";
 import successImage from '../../asset/taraedle-congrat.gif';
 import '../style/style.css'
-import { wordInfo } from "../../lib/words";
+import { WordInfo } from "../../constant/type";
 
 type props = {
     isOpen: boolean,
     leftFunction: () => void,
     rightFunction: () => void,
     title: string,
-    info: wordInfo,
+    info: WordInfo,
     lBtn: string,
     rBtn: string
 }

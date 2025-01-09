@@ -2,14 +2,7 @@ import { useState } from 'react'
 import { CONFIG } from '../constant/config'
 import apiClient from './auth'
 import { toCharArray } from './stringToCharArray'
-import { Meaning, Quiz } from './wordFromWeb'
-
-export interface wordInfo {
-    value: string,
-    length: number,
-    count: number,
-    definitions: Meaning[],
-}
+import { Meaning, Quiz } from '../constant/type'
 
 const quizData = window.localStorage.getItem('quiz');
 
