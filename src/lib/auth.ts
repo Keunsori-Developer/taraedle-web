@@ -17,6 +17,31 @@ interface newToken{
     refreshToken: string
 }
 
+interface statistic{
+    solveCount: number,
+    lastSolve: string,
+    solveStreak: number,
+    detailedStats: {
+        EASY: solveLevelCount,
+        MEDIUM: solveLevelCount,
+        HARD: solveLevelCount,
+        VERYHARD: solveLevelCount
+    }
+}
+
+interface solveLevelCount{
+    totalSolved: number,
+    averageAttempts: number,
+    attempCounts: {
+        "1": number,
+        "2": number,
+        "3": number,
+        "4": number,
+        "5": number,
+        "6": number
+    }
+}
+
 export const getAccessToken = () : string | null => {
     return localStorage.getItem('accessToken')
 }
@@ -142,6 +167,19 @@ export const getNewToken = async () => {
         setRefreshToken(response.data.refreshToken)
         setAccessToken(response.data.accessToken)
         return response.data.accessToken;
+    } catch (error) {
+        throw error
+    }
+}
+
+export const getStatistic = async () => {
+    try {
+        const response = await apiClient.get<statistic>(
+            `/user/stat`
+        )
+        const data = response.data;
+        console.log(data);
+        return data;
     } catch (error) {
         throw error
     }

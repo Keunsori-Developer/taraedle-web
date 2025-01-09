@@ -5,13 +5,13 @@ import { Grid } from '../component/grid/Grid';
 import { CONFIG } from '../constant/config';
 import { exportResult, getQuizSetting, isWinngWord, quizValue, wordInfo } from '../lib/words';
 import { useTranslation } from 'react-i18next';
-import { Alert } from '../component/popup/Alert';
-import { ResultPopup } from "../component/popup/ResultPopup";
+import { Alert } from '../component/modal/Alert';
+import { ResultPopup } from "../component/modal/ResultPopup";
 import * as Hangul from 'hangul-js'
 import { isAvailableWord, Meaning, quizSetting } from "../lib/wordFromWeb";
-import { LevelPopUp } from "../component/popup/LevelPopUp";
+import { LevelPopUp } from "../component/modal/LevelPopUp";
 import { createContext } from "vm";
-import { Guide } from "../component/popup/Guide";
+import { Guide } from "../component/modal/Guide";
 
 const ALERT_TIME_MS = 2000
 
