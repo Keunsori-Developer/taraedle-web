@@ -36,7 +36,10 @@ const Statistic = ({ isOpen, isClose }: props) => {
             leaveTo="opacity-0"
         >
             <div className="infoBox">
-
+                총 풀이횟수 : {status.solveCount}<br />
+                최근 풀이 일자 : {status.lastSolve}<br />
+                연속 풀이횟수 : {status.solveStreak}<br />
+                
                 <button className="select" onClick={() => { isClose() }}>닫기</button>
             </div>
         </Transition>
