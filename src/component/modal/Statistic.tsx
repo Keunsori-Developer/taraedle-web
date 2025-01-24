@@ -13,7 +13,9 @@ const Statistic = ({ isOpen, isClose }: props) => {
 
     useEffect(() => {
         console.log('token check');
-        getStatistic();
+        if (localStorage.getItem('accessToken')) {
+            getStatistic();
+        }
     }, [localStorage.getItem('accesToken')]);
     
     useEffect(() => {
