@@ -150,6 +150,7 @@ export const getNewToken = async () => {
 
 export const getStatistic = async () => {
     try {
+        console.log('call getStatistic')
         const response = await apiClient.get<StatusInfo>(
             `/user/stat`
         )
