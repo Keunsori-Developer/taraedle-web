@@ -6,6 +6,7 @@ import { Quiz, Meaning } from '../constant/type'
 
 export const quizSetting = async (difficulty: string) => {
   try {
+    console.log(difficulty);
     const response = await apiClient.post<Quiz>(
       `/quiz`, {difficulty}
     )

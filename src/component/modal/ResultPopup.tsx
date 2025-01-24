@@ -2,7 +2,9 @@ import { Transition } from "@headlessui/react";
 import classNames from "classnames";
 import successImage from '../../asset/taraedle-congrat.gif';
 import '../style/style.css'
-import { WordInfo } from "../../constant/type";
+import { StatusInfo, WordInfo } from "../../constant/type";
+import { useEffect, useState } from "react";
+import { getStatistic } from "../../lib/auth";
 
 type props = {
     isOpen: boolean,
@@ -23,6 +25,13 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
         }
     )
     
+    const [status, setStatus] = useState<StatusInfo>();
+
+    useEffect(() => {
+        getStatistic();
+        
+    }, [isOpen])
+
     return (
         <Transition
             show={isOpen}
