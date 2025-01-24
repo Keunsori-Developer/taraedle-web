@@ -29,8 +29,16 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
 
     useEffect(() => {
         getStatistic();
-        
     }, [isOpen])
+    
+    useEffect(() => {
+        const data = localStorage.getItem('statusInfo');
+        if (data) {
+            const statInfo = JSON.parse(data);
+            setStatus(statInfo);
+            console.log(status);
+        }
+    }, [localStorage.getItem('statusInfo')])
 
     return (
         <Transition
