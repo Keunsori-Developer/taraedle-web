@@ -76,14 +76,14 @@ const ProblemPage = () => {
         if (winningWord) {
           // 데이터 전송 주석
           exportResult(guesses.length + 1, true)
-          // getStatistic();
+          getStatistic();
           return setIsGameWon(true)
         }
         
         if (guesses.length == quizValue.difficulty.maxAttempts - 1) {
           // 데이터 전송 주석
           exportResult(quizValue.difficulty.maxAttempts - 1, false)
-          // getStatistic();
+          getStatistic();
           return setIsGameLost(true)
         }
       }
