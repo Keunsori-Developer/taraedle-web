@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { CONFIG } from '../constant/config'
-import apiClient from './auth'
+import apiClient, { getStatistic } from './auth'
 import { toCharArray } from './stringToCharArray'
 import { Meaning, Quiz } from '../constant/type'
 
@@ -47,6 +47,7 @@ export const exportResult = async (tries: number, isSolved: boolean) => {
                 solved: isSolved
             }
         )
+        getStatistic();
     } catch (error) {
         throw error;
     }

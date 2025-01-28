@@ -31,9 +31,8 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
         const data = localStorage.getItem('statusInfo');
         if (data) {
             const statInfo = JSON.parse(data);
-            setStatus(statInfo);
+            setStatus(statInfo)
             console.log(statInfo);
-            console.log(status);
         }
     }, [localStorage.getItem('statusInfo')])
 
@@ -65,6 +64,9 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
                             ))}
                         </div>
                     ))}
+                </div>
+                <div>
+                    {status.solveCount}
                 </div>
                 <br/>
                 <div className="footer">
