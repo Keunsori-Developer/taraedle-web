@@ -32,6 +32,7 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
     // }, [isOpen])
     
     useEffect(() => {
+        console.log('useeffect')
         const data = localStorage.getItem('statusInfo');
         if (data) {
             const statInfo = JSON.parse(data);
