@@ -47,6 +47,7 @@ export const exportResult = async (tries: number, isSolved: boolean) => {
                 solved: isSolved
             }
         )
+        console.log('getStatic')
         getStatistic();
     } catch (error) {
         throw error;
