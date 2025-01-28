@@ -25,7 +25,7 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
         }
     )
     
-    const [status, setStatus] = useState<StatusInfo>();
+    const [status, setStatus] = useState<StatusInfo>({});
     
     useEffect(() => {
         const data = localStorage.getItem('statusInfo');
