@@ -28,13 +28,16 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
     const [status, setStatus] = useState<StatusInfo>({});
     
     useEffect(() => {
-        const data = localStorage.getItem('statusInfo');
-        if (data) {
-            const statInfo = JSON.parse(data);
-            setStatus(statInfo)
-            console.log(statInfo);
+        const fetchStatus = async () => {
+            const data = localStorage.getItem('statusInfo');
+            if (data) {
+                const statInfo = JSON.parse(data);
+                setStatus(statInfo)
+                console.log(statInfo);
+            }
         }
-    }, [localStorage.getItem('statusInfo')])
+        fetchStatus();
+    }, [])
 
     return (
         <Transition

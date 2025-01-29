@@ -47,7 +47,7 @@ const ProblemPage = () => {
       setCurrentGuess(newGuess)
     }
   }
-
+  
   const onEnter = () => {
     if (isGameWon || isGameLost) {
       return
