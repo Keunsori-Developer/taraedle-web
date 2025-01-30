@@ -6,7 +6,7 @@ interface props {
   key: number,
 }
 
-export const EmptyRow = ({ count, key } : props) => {
+export const EmptyRow = ({ count } : props) => {
     const emptyCells = Array.from(Array(count))
 
   return (

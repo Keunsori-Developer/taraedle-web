@@ -17,6 +17,8 @@ const Statistic = ({ isOpen, isClose }: props) => {
         }
     }, [localStorage.getItem('accesToken')]);
     
+    // 로그인 후 생성된 localstorage로 인해 통계 세팅됨
+
     useEffect(() => {
         const data = localStorage.getItem('statusInfo');
         if (data) {

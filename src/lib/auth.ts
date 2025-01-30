@@ -156,6 +156,7 @@ export const getStatistic = async () => {
         const data = response.data;
         const value = JSON.stringify(data);
         localStorage.setItem('statusInfo', value);
+        return data;
     } catch (error) {
         throw error
     }

@@ -32,9 +32,9 @@ export const Keyboard = ({ onChar, onDelete, onEnter, guesses }: Props) => {
         <div>
             <div className="flex justify-center mb-1">
             {ORTHOGRAPHY.slice(0, Math.floor(ORTHOGRAPHY.length * 10 / 36)).map(
-                (char) => (
+                (char, index) => (
                     <Key
-                        key={char}
+                        key={char === '' ? index : char}
                         value={char}
                         onClick={onClick}
                         status={charStatuses[char]}/>

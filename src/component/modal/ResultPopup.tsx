@@ -27,17 +27,21 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
     
     const [status, setStatus] = useState<StatusInfo>({});
     
-    useEffect(() => {
-        const fetchStatus = async () => {
-            const data = localStorage.getItem('statusInfo');
-            if (data) {
-                const statInfo = JSON.parse(data);
-                setStatus(statInfo)
-                console.log(statInfo);
-            }
+    const fetchStatus = async () => {
+        try {
+            console.log('test')
+            const result = await getStatistic();
+            setStatus(result);
+        } catch (e) {
+            
         }
+    }
+
+    useEffect(() => {
         fetchStatus();
-    }, [])
+    }, [isOpen])
+
+    
 
     return (
         <Transition
@@ -54,7 +58,6 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
                 {title === '정답' ? <img src={successImage} className="successImg"/> : <br/>}
                 {info.value}<br/>
                 <div>
-                    <br/>
                     {info.definitions.map((mean) => (
                         <div>
                             <div>
