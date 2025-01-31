@@ -23,25 +23,25 @@ export const LevelPopUp = ({ isOpen, isClose }: Modal) => {
             leaveTo="opacity-0"
         >
             <div className="infoBox">
-                <button className="select" onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'EASY'}>
+                <button className="select" onClick={(e) => selectQuiz(e.currentTarget.value)} value={'EASY'}>
                     <h1 style={{fontSize: '1.2rem'}}>
                         쉬움
                     </h1>
                     2~3글자, 4~6개 자모음, 복합자모음 없음, 최대 6번 시도
                 </button>
-                <button className="select" onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'MEDIUM'}>
+                <button className="select" onClick={(e) => selectQuiz(e.currentTarget.value)} value={'MEDIUM'}>
                     <h1 style={{fontSize: '1.2rem'}}>
                         보통
                     </h1>
                     2~3글자, 6~9개 자모음, 복합자모음 랜덤, 최대 6번 시도
                 </button>
-                <button className="select" onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'HARD'}>
+                <button className="select" onClick={(e) => selectQuiz(e.currentTarget.value)} value={'HARD'}>
                     <h1 style={{fontSize: '1.2rem'}}>
                         어려움
                     </h1>
                     3~3글자, 7~11개 자모음, 복합자모음 랜덤, 최대 6번 시도
                 </button>
-                <button className="select" onClick={(e) => selectQuiz((e.target as HTMLButtonElement).value)} value={'VERYHARD'}>
+                <button className="select" onClick={(e) => selectQuiz(e.currentTarget.value)} value={'VERYHARD'}>
                     <h1 style={{fontSize: '1.2rem'}}>
                         매우 어려움
                     </h1>
