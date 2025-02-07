@@ -72,8 +72,6 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
                     ))}
                 </div>
                 <div>
-                    총 풀이횟수 : {status.solveCount}<br />
-                    최근 풀이 일자 : {status.lastSolve}<br />
                     연속 풀이횟수 : {status.solveStreak}<br />
                 </div>
                 <br/>
