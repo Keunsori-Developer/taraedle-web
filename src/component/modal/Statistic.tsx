@@ -1,7 +1,7 @@
 import { Transition } from "@headlessui/react";
 import React, { useEffect, useState } from "react";
 import { getStatistic } from "../../lib/auth";
-import { StatusInfo } from "../../constant/type";
+import { StatusInfo, UserInfo } from "../../constant/type";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import '../../index.css'
@@ -15,7 +15,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip);
 ChartJS.defaults.font.family = 'Rix X ladywatermelon Regular'
 
 const Statistic = ({ isOpen, isClose }: props) => {
-    const [status, setStatus] = useState<StatusInfo>({});
+    const [userInfo, setUserInfo] = useState<UserInfo>({});
     const [count, setCount] = useState<number[]>();
 
     useEffect(() => {
@@ -27,15 +27,15 @@ const Statistic = ({ isOpen, isClose }: props) => {
     // 로그인 후 생성된 localstorage로 인해 통계 세팅됨
 
     useEffect(() => {
-        const data = localStorage.getItem('statusInfo');
+        const data = localStorage.getItem('userInfo');
         if (data) {
-            const statInfo = JSON.parse(data);
-            setStatus(statInfo)
+            const info = JSON.parse(data);
+            setUserInfo(info)
             setCount([
-                status.detailedStats?.EASY?.totalSolved ? status.detailedStats?.EASY?.totalSolved : 0,
-                status.detailedStats?.MEDIUM?.totalSolved ? status.detailedStats?.MEDIUM?.totalSolved : 0,
-                status.detailedStats?.HARD?.totalSolved ? status.detailedStats?.HARD?.totalSolved : 0,
-                status.detailedStats?.VERYHARD?.totalSolved ? status.detailedStats?.VERYHARD?.totalSolved : 0,
+                userInfo.quizStats?.details?.EASY?.totalCnt ? userInfo.quizStats?.details?.EASY?.solvedCnt : 0,
+                userInfo.quizStats?.details?.MEDIUM?.totalCnt ? userInfo.quizStats?.details?.MEDIUM?.solvedCnt : 0,
+                userInfo.quizStats?.details?.HARD?.totalCnt ? userInfo.quizStats?.details?.HARD?.solvedCnt : 0,
+                userInfo.quizStats?.details?.VERYHARD?.totalCnt ? userInfo.quizStats?.details?.VERYHARD?.solvedCnt : 0,
             ])
             // console.log(statInfo);
         }
@@ -65,9 +65,9 @@ const Statistic = ({ isOpen, isClose }: props) => {
                 <h1 style={{ fontSize: "1.2rem" }}>통계</h1>
                 <br />
                 <div style={{textAlign: "left", width: "80%"}}>
-                    총 풀이횟수 : {status.solveCount}<br />
-                    최근 풀이 일자 : {status.lastSolve}<br />
-                    연속 풀이횟수 : {status.solveStreak}<br />
+                    총 풀이횟수 : {userInfo.quizStats?.solvedCnt}<br />
+                    최근 풀이 일자 : {userInfo.quizStats?.lastSolve}<br />
+                    연속 풀이횟수 : {userInfo.quizStats?.solvedCnt}<br />
                 </div>
                 
 

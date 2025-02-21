@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
-import { StatusInfo } from "../constant/type";
+import { UserInfo } from "../constant/type";
 
 interface user {
     id: string,
@@ -150,12 +150,12 @@ export const getNewToken = async () => {
 
 export const getStatistic = async () => {
     try {
-        const response = await apiClient.get<StatusInfo>(
-            `/user/stat`
+        const response = await apiClient.get<UserInfo>(
+            `/user`
         )
         const data = response.data;
         const value = JSON.stringify(data);
-        localStorage.setItem('statusInfo', value);
+        localStorage.setItem('userInfo', value);
         return data;
     } catch (error) {
         throw error

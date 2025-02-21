@@ -2,7 +2,7 @@ import { Transition } from "@headlessui/react";
 import classNames from "classnames";
 import successImage from '../../asset/taraedle-congrat.gif';
 import '../style/style.css'
-import { StatusInfo, WordInfo } from "../../constant/type";
+import { StatusInfo, UserInfo, WordInfo } from "../../constant/type";
 import { useEffect, useState } from "react";
 import { getStatistic } from "../../lib/auth";
 
@@ -25,13 +25,12 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
         }
     )
     
-    const [status, setStatus] = useState<StatusInfo>({});
+    const [userInfo, setUserInfo] = useState<UserInfo>({});
     
     const fetchStatus = async () => {
         try {
-            console.log('test')
             const result = await getStatistic();
-            setStatus(result);
+            setUserInfo(result);
         } catch (e) {
             
         }
@@ -72,7 +71,7 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
                     ))}
                 </div>
                 <div>
-                    연속 풀이횟수 : {status.solveStreak}<br />
+                    연속 풀이횟수 : {userInfo.quizStats?.solvedCnt}<br />
                 </div>
                 <br/>
                 <div className="footer">

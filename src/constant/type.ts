@@ -1,8 +1,15 @@
+export interface UserInfo{
+    id?: string,
+    email?: string,
+    name?: string,
+    quizStats?: StatusInfo
+}
+
 export interface StatusInfo{
-    solveCount?: number,
+    solvedCnt?: number,
+    totalCnt?: number,
     lastSolve?: string,
-    solveStreak?: number,
-    detailedStats?: {
+    details?: {
         EASY?: SolveLevelCount,
         MEDIUM?: SolveLevelCount,
         HARD?: SolveLevelCount,
@@ -11,9 +18,9 @@ export interface StatusInfo{
 }
 
 export interface SolveLevelCount{
-    totalSolved: number,
-    averageAttempts: number,
-    attempCounts: {
+    totalCnt: number,
+    solvedCnt: number,
+    solvedAttemptsStats: {
         "1": number,
         "2": number,
         "3": number,
