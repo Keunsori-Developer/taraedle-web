@@ -22,34 +22,30 @@ const Statistic = ({ isOpen, isClose }: props) => {
         if (localStorage.getItem('accessToken')) {
             getStatistic();
         }
-    }, [localStorage.getItem('accesToken')]);
+    }, []);
     
     // 로그인 후 생성된 localstorage로 인해 통계 세팅됨
 
-    useEffect(() => {
-        const data = localStorage.getItem('userInfo');
-        if (data) {
-            const info = JSON.parse(data);
-            setUserInfo(info)
-            setCount([
-                userInfo.quizStats?.details?.EASY?.totalCnt ? userInfo.quizStats?.details?.EASY?.solvedCnt : 0,
-                userInfo.quizStats?.details?.MEDIUM?.totalCnt ? userInfo.quizStats?.details?.MEDIUM?.solvedCnt : 0,
-                userInfo.quizStats?.details?.HARD?.totalCnt ? userInfo.quizStats?.details?.HARD?.solvedCnt : 0,
-                userInfo.quizStats?.details?.VERYHARD?.totalCnt ? userInfo.quizStats?.details?.VERYHARD?.solvedCnt : 0,
-            ])
-            // console.log(statInfo);
+    const fetchStatus = async () => {
+        try {
+            if (localStorage.getItem('accessToken')) {
+                const result = await getStatistic();
+                setUserInfo(result);
+                setCount([
+                    result.quizStats?.details?.EASY?.totalCnt ? result.quizStats?.details?.EASY?.solvedCnt : 0,
+                    result.quizStats?.details?.MEDIUM?.totalCnt ? result.quizStats?.details?.MEDIUM?.solvedCnt : 0,
+                    result.quizStats?.details?.HARD?.totalCnt ? result.quizStats?.details?.HARD?.solvedCnt : 0,
+                    result.quizStats?.details?.VERYHARD?.totalCnt ? result.quizStats?.details?.VERYHARD?.solvedCnt : 0,
+                ])
+            }
+        } catch (e) {
+            
         }
-    }, [localStorage.getItem('statusInfo')])
+    }
 
-    // solveCount?: number,
-    // lastSolve?: string,
-    // solveStreak?: number,
-    // detailedStats?: {
-    //     EASY?: SolveLevelCount,
-    //     MEDIUM?: SolveLevelCount,
-    //     HARD?: SolveLevelCount,
-    //     VERYHARD?: SolveLevelCount
-    // }
+    useEffect(() => {
+        fetchStatus();
+    }, [isOpen])
 
     return (
         <Transition
@@ -72,6 +68,7 @@ const Statistic = ({ isOpen, isClose }: props) => {
                 
 
                 <Bar
+                    // data={chartData}
                     data={{
                         labels: ['쉬움', '보통', '어려움', '매우어려움'],
                         datasets: [
