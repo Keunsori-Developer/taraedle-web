@@ -21,8 +21,11 @@ export const quizSetting = async (difficulty: string) => {
     const quiz = JSON.stringify(result);
     window.localStorage.setItem('quiz', quiz);
     window.location.href = 'problem';
-  } catch (error) {
-    throw error
+  } catch (error: any) {
+    if (error.response && error.response.status == 400) {
+      throw error;
+    }
+    // throw error
   }
 }
 
@@ -34,7 +37,8 @@ export const isAvailableWord = async (word: string) => {
     )
   } catch (error: any) {
     if (error.response && error.response.status === 400) {
-      throw error;
+      // throw error;
+      return;
     }
     throw error;
   }

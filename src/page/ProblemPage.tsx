@@ -140,6 +140,7 @@ const ProblemPage = () => {
       <ResultPopup isOpen={isGameWon} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
       <ResultPopup isOpen={isGameLost} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="오답" info={info} lBtn="메인으로" rBtn="다른문제풀기" />
       
+      <button onClick={()=>{console.log(quizValue)}}>test</button>
       {/* <LevelPopUp isOpen={isOpen} isClose={popupHandler}/> */}
     </div>
   );
