@@ -27,25 +27,25 @@ export const LevelPopUp = ({ isOpen, isClose }: Modal) => {
                     <h1 style={{fontSize: '1.2rem'}}>
                         쉬움
                     </h1>
-                    2~3글자, 4~6개 자모음, 복합자모음 없음, 최대 6번 시도
+                    2~3글자, 4~4개 자모음, 복합자모음 없음, 최대 7번 시도
                 </button>
                 <button className="select" onClick={(e) => selectQuiz(e.currentTarget.value)} value={'MEDIUM'}>
                     <h1 style={{fontSize: '1.2rem'}}>
                         보통
                     </h1>
-                    2~3글자, 6~9개 자모음, 복합자모음 랜덤, 최대 6번 시도
+                    2~3글자, 5~6개 자모음, 복합자모음 랜덤, 최대 6번 시도
                 </button>
                 <button className="select" onClick={(e) => selectQuiz(e.currentTarget.value)} value={'HARD'}>
                     <h1 style={{fontSize: '1.2rem'}}>
                         어려움
                     </h1>
-                    3~3글자, 7~11개 자모음, 복합자모음 랜덤, 최대 6번 시도
+                    2~3글자, 7~9개 자모음, 복합자모음 랜덤, 최대 6번 시도
                 </button>
-                <button className="select" onClick={(e) => selectQuiz(e.currentTarget.value)} value={'VERYHARD'}>
+                <button className="select" onClick={(e) => selectQuiz(e.currentTarget.value)} value={'CHALLENGE'}>
                     <h1 style={{fontSize: '1.2rem'}}>
-                        매우 어려움
+                        챌린지
                     </h1>
-                    3~4글자, 8~16개 자모음, 복합자모음 랜덤, 최대 6번 시도
+                    3~4글자, 8~11개 자모음, 복합자모음 랜덤, 최대 8번 시도
                 </button>
                 <button className="select" onClick={() => { isClose() }}>닫기</button>
             </div>
