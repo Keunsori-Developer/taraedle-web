@@ -22,10 +22,10 @@ export const quizSetting = async (difficulty: string) => {
     window.localStorage.setItem('quiz', quiz);
     window.location.href = 'problem';
   } catch (error: any) {
-    if (error.response && error.response.status == 400) {
-      throw error;
-    }
-    // throw error
+    // if (error.response && error.response.status == 400) {
+    //   throw error;
+    // }
+    throw error
   }
 }
 

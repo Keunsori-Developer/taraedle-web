@@ -60,7 +60,7 @@ export const MainPage = () => {
             }
 
             <LevelPopUp isOpen={isOpen} isClose={popupHandler} />
-            <Statistic isOpen={isStatOpen } isClose={statHandler}/>
+            <Statistic isOpen={isStatOpen} isClose={statHandler} />
         </div>
     )
 }

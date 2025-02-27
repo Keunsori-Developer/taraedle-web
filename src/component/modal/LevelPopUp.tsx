@@ -15,7 +15,9 @@ export const LevelPopUp = ({ isOpen, isClose }: Modal) => {
         isClose();
         quizSetting(value).catch((error) => {
             // console.log('already clear')
-            errMsgUp()
+            if (error.response && error.response.status == 400) {
+                errMsgUp()
+            }
         });
     }
     
@@ -70,7 +72,7 @@ export const LevelPopUp = ({ isOpen, isClose }: Modal) => {
                 </div>
                 
             </Transition>
-            <Alert message={t('단어의 길이가 부족해요.')} isOpen={isAlreadyClear} variant="warning" />
+            <Alert message={t('오늘의 챌린지를 이미 완료하였습니다.')} isOpen={isAlreadyClear} variant="warning" />
         </>
     )
 }
