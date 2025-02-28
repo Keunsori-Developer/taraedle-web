@@ -4,18 +4,24 @@ import { Button } from "../component/button/Button";
 import { Logout } from '../lib/auth';
 import { LevelPopUp } from '../component/modal/LevelPopUp';
 import Statistic from '../component/modal/Statistic';
+import { ChalPopUp } from '../component/modal/ChalPopUp';
 
 export const MainPage = () => {
     const [isLogin, setIsLogin] = useState<boolean>(false)
-    const [isOpen, setIsOpen] = useState<boolean>(false)
+    const [levelOpen, setLevelOpen] = useState<boolean>(false)
     const [isStatOpen, setIsStatOpen] = useState<boolean>(false);
+    const [chalOpen, setChalOpen] = useState<boolean>(false);
 
     const popupHandler = () => {
-        setIsOpen(!isOpen);
+        setLevelOpen(!levelOpen);
     }
 
     const statHandler = () => {
         setIsStatOpen(!isStatOpen);
+    }
+
+    const chalHandler = () => {
+        setChalOpen(!chalOpen)
     }
 
     useEffect(() => {
@@ -44,8 +50,8 @@ export const MainPage = () => {
         <div>
             <img style={{ margin: '100px auto 100px auto' }} src={titleImg} />
             <Button value="게임시작" onClick={popupHandler} />
-            {/* <Button value="챌린지" onClick={openHandler}/> */}
-            <Button value="설정" onClick={() => { }} />
+            <Button value="챌린지" onClick={chalHandler}/>
+            {/* <Button value="설정" onClick={() => { }} /> */}
             {isLogin ?
                 <>
                     <Button value="로그아웃" onClick={() => { 
@@ -59,7 +65,8 @@ export const MainPage = () => {
                     }} />
             }
 
-            <LevelPopUp isOpen={isOpen} isClose={popupHandler} />
+            <LevelPopUp isOpen={levelOpen} isClose={popupHandler} />
+            <ChalPopUp isOpen={chalOpen} isClose={chalHandler}/>
             <Statistic isOpen={isStatOpen} isClose={statHandler} />
         </div>
     )
