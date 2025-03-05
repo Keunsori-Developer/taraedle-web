@@ -13,8 +13,11 @@ export const LevelPopUp = ({ isOpen, isClose }: Modal) => {
     const selectQuiz = (value: string) => {
         localStorage.setItem('difficulty', value);
         isClose();
-        quizSetting(value).catch((error) => {
-            // console.log('already clear')
+        quizSetting(value)
+            .then(() => {
+                window.location.href = 'problem';
+            })
+            .catch((error) => {
             if (error.response && error.response.status == 400) {
                 errMsgUp()
             }

@@ -65,7 +65,16 @@ const ProblemPage = () => {
       errMsgUp()
       return;
     }
-
+    if (localStorage.getItem('level') === 'CHALLENGE') {
+      let arr: string[][] = [];
+      const data = localStorage.getItem('chalArr');
+      if (data) {
+        arr = JSON.parse(data);
+      }
+      arr.push(currentGuess);
+      localStorage.setItem('chalArr', JSON.stringify(arr));
+      console.log(arr);
+    }
     const winningWord = isWinngWord(currentGuess.join(''))
     isAvailableWord(currentGuess.join('')).then(() => {
       if (currentGuess.length === quizValue.word.count && guesses.length < quizValue.difficulty.maxAttempts && !isGameWon) {      
@@ -118,6 +127,17 @@ const ProblemPage = () => {
   const popupHandler = () => {
     setIsOpen(!isOpen);
   }
+
+  useEffect(() => {
+    if (localStorage.getItem('level') === 'CHALLENGE') {
+      const data = localStorage.getItem('chalArr');
+      let arr: string[][] = [];
+      if (data) {
+        arr = JSON.parse(data);
+      }
+      setGuesses(arr);
+    }
+  }, [])
 
   return (
     <div className="fit">

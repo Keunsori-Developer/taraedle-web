@@ -55,21 +55,23 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
             <div className="infoBox">
                 <span className={titleStyle}>{title}</span>
                 {title === '정답' ? <img src={successImage} className="successImg"/> : <br/>}
-                {info.value}<br/>
-                <div>
-                    {info.definitions.map((mean) => (
-                        <div>
+                {info.value}<br />
+                {info.definitions ? 
+                    <div>
+                        {info.definitions.map((mean) => (
                             <div>
-                                {mean.pos}
-                            </div>
-                            {mean.meanings.map((meaning) => (
                                 <div>
-                                    {meaning}
+                                    {mean.pos}
                                 </div>
-                            ))}
-                        </div>
-                    ))}
-                </div>
+                                {mean.meanings.map((meaning) => (
+                                    <div>
+                                        {meaning}
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div> : null
+                }
                 <div>
                     연속 풀이횟수 : {userInfo.quizStats?.solvedCnt}<br />
                 </div>

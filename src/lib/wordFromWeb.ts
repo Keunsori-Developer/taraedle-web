@@ -19,13 +19,14 @@ export const quizSetting = async (difficulty: string) => {
       }
     }
     const quiz = JSON.stringify(result);
+    window.localStorage.setItem('level', difficulty);
     window.localStorage.setItem('quiz', quiz);
-    window.location.href = 'problem';
+    // window.location.href = 'problem';
   } catch (error: any) {
-    // if (error.response && error.response.status == 400) {
-    //   throw error;
-    // }
-    throw error
+    if (error.response && error.response.status == 400 && error.response.data.errorCode === 'ALREADY_SOLVED_DAILY_CHALLENGE') {
+      console.log(error.response.data);
+      throw error;
+    }
   }
 }
 

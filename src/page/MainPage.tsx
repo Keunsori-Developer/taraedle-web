@@ -49,11 +49,11 @@ export const MainPage = () => {
     return (
         <div>
             <img style={{ margin: '100px auto 100px auto' }} src={titleImg} />
-            <Button value="게임시작" onClick={popupHandler} />
-            <Button value="챌린지" onClick={chalHandler}/>
-            {/* <Button value="설정" onClick={() => { }} /> */}
             {isLogin ?
                 <>
+                    <Button value="게임시작" onClick={popupHandler} />
+                    <Button value="챌린지" onClick={chalHandler}/>
+                    {/* <Button value="설정" onClick={() => { }} /> */}
                     <Button value="로그아웃" onClick={() => { 
                         Logout()
                     }} />
