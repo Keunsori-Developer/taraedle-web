@@ -37,6 +37,7 @@ export const ChalPopUp = ({ isOpen, isClose }: Modal) => {
     
     const challengeInProgress = () => {
         localStorage.setItem('wip', '1');
+        isClose();
         window.location.href = 'problem';
     }
 
