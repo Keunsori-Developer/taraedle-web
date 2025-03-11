@@ -13,7 +13,7 @@ export interface StatusInfo{
         EASY?: SolveLevelCount,
         MEDIUM?: SolveLevelCount,
         HARD?: SolveLevelCount,
-        VERYHARD?: SolveLevelCount
+        CHALLENGE?: SolveLevelCount
     }
 }
 

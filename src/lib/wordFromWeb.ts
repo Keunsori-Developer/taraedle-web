@@ -23,7 +23,7 @@ export const quizSetting = async (difficulty: string) => {
     window.localStorage.setItem('quiz', quiz);
     // window.location.href = 'problem';
   } catch (error: any) {
-    if (error.response && error.response.status == 400 && error.response.data.errorCode === 'ALREADY_SOLVED_DAILY_CHALLENGE') {
+    if (error.response && error.response.status === 400 && error.response.data.errorCode === 'ALREADY_SOLVED_DAILY_CHALLENGE') {
       console.log(error.response.data);
       throw error;
     }
@@ -37,10 +37,8 @@ export const isAvailableWord = async (word: string) => {
       `/word/${word}`
     )
   } catch (error: any) {
-    if (error.response && error.response.status === 400) {
-      // throw error;
-      return;
+    if (error.response && error.response.status === 400 && error.response.data.errorCode === 'INVALID_WORD') {
+      throw error;
     }
-    throw error;
   }
 }

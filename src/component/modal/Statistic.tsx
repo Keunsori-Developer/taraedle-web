@@ -35,7 +35,7 @@ const Statistic = ({ isOpen, isClose }: props) => {
                     result.quizStats?.details?.EASY?.totalCnt ? result.quizStats?.details?.EASY?.solvedCnt : 0,
                     result.quizStats?.details?.MEDIUM?.totalCnt ? result.quizStats?.details?.MEDIUM?.solvedCnt : 0,
                     result.quizStats?.details?.HARD?.totalCnt ? result.quizStats?.details?.HARD?.solvedCnt : 0,
-                    result.quizStats?.details?.VERYHARD?.totalCnt ? result.quizStats?.details?.VERYHARD?.solvedCnt : 0,
+                    result.quizStats?.details?.CHALLENGE?.totalCnt ? result.quizStats?.details?.CHALLENGE?.solvedCnt : 0,
                 ])
             }
         } catch (e) {
@@ -70,7 +70,7 @@ const Statistic = ({ isOpen, isClose }: props) => {
                 <Bar
                     // data={chartData}
                     data={{
-                        labels: ['쉬움', '보통', '어려움', '매우어려움'],
+                        labels: ['쉬움', '보통', '어려움', '챌린지'],
                         datasets: [
                             {
                                 // label: 'Dataset 1',

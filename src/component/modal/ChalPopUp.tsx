@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import '../style/style.css'
 import { quizSetting } from "../../lib/wordFromWeb";
-import { CONFIG } from "../../constant/config";
 import { Modal, Quiz } from "../../constant/type";
 import { Alert } from "./Alert";
 import { useTranslation } from 'react-i18next';
@@ -10,31 +9,13 @@ import { Grid } from "../grid/Grid";
 
 const ALERT_TIME_MS = 2000
 
-export const ChalPopUp = ({ isOpen, isClose }: Modal) => {
-    const selectQuiz = (value: string) => {
-        localStorage.setItem('difficulty', value);
-        isClose();
-        quizSetting(value).catch((error) => {
-            // console.log('already clear')
-            if (error.response && error.response.status == 400) {
-                errMsgUp()
-            }
-        });
-    }
-    
+export const ChalPopUp = ({ isOpen, isClose }: Modal) => { 
     const [isAlreadyClear, setIsAlreadyClear] = useState<boolean>(false);
     const [clearStatus, setClearStatus] = useState<number>(0);  // 0 : 미진행, 1 : 진행중, 2 : 진행완료
     const [quiz, setQuiz] = useState<Quiz | null>(null);
     const [date, setDate] = useState<number[]>([]);
     const [qData, setQData] = useState<string[][]>([]);
 
-    const errMsgUp = () => {
-        setIsAlreadyClear(true)
-          return setTimeout(() => {
-            setIsAlreadyClear(false)
-          }, ALERT_TIME_MS);
-    }
-    
     const challengeInProgress = () => {
         localStorage.setItem('wip', '1');
         isClose();
@@ -84,7 +65,7 @@ export const ChalPopUp = ({ isOpen, isClose }: Modal) => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
             >
-                <div className="infoBox" style={{ alignContent: "start" }}>
+                <div className="infoBox" style={{ alignContent: "start", padding: '1rem' }}>
                     <span style={{fontSize: '2.5rem', marginTop: '1rem'}}>
                         챌린지
                     </span>
@@ -93,8 +74,8 @@ export const ChalPopUp = ({ isOpen, isClose }: Modal) => {
                         <span>
                             {date[0]}년 {date[1]}월 {date[2]}일<br/>
                             챌린지 진행 
-                        {clearStatus == 0 ? 
-                            "가능" : clearStatus == 1 ? "중" : "완료"
+                        {clearStatus === 0 ? 
+                            "가능" : clearStatus === 1 ? "중" : "완료"
                         }
                         <br/>
                         </span>
@@ -113,8 +94,10 @@ export const ChalPopUp = ({ isOpen, isClose }: Modal) => {
                                     글자 수 : {quiz?.word.length} 글자<br/>
                                     자모 갯수 : {quiz?.word.count} 개<br />
                                     최대 입력 가능 횟수 : {quiz?.word.count} 번
+                                    <br/>
+                                    <br/>
                                 </span>
-                                <button className="select" onClick={() => {challengeInProgress()}} value={'CHALLENGE'}>시작</button>
+                                <button className="select" onClick={() => {challengeInProgress()}} value={'CHALLENGE'}>{clearStatus === 0 ? '시작' : '이어하기'}</button>
                             </> :
                             <>
                                 <span  style={{textAlign: 'left'}}>
