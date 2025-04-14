@@ -73,7 +73,6 @@ const ProblemPage = () => {
       }
       arr.push(currentGuess);
       localStorage.setItem('chalArr', JSON.stringify(arr));
-      console.log(arr);
     }
     const winningWord = isWinngWord(currentGuess.join(''))
     isAvailableWord(currentGuess.join('')).then(() => {
@@ -104,6 +103,13 @@ const ProblemPage = () => {
 
   const errMsgUp = () => {
     setIsNotMeaningful(true)
+    let arr: string[][] = [];
+      const data = localStorage.getItem('chalArr');
+      if (data) {
+        arr = JSON.parse(data);
+      }
+      arr.pop();
+      localStorage.setItem('chalArr', JSON.stringify(arr));
       return setTimeout(() => {
         setIsNotMeaningful(false)
       }, ALERT_TIME_MS);
