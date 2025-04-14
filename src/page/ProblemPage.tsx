@@ -126,7 +126,15 @@ const ProblemPage = () => {
   const goNextQuiz = () => {
     const difficulty = localStorage.getItem('difficulty');
     if (difficulty) {
-      quizSetting(difficulty);
+      quizSetting(difficulty)
+          .then(() => {
+              window.location.href = 'problem';
+          })
+          .catch((error) => {
+          if (error.response && error.response.status == 400) {
+              errMsgUp()
+          }
+      });
     }
   }
 
@@ -163,8 +171,8 @@ const ProblemPage = () => {
       <Alert message={t('단어의 길이가 부족해요.')} isOpen={isNotEnoughLetters} variant="warning" />
       <Alert message={t('존재하지 않는 단어에요.')} isOpen={isNotMeaningful} variant="warning" />
       <Guide isOpen={isOpen} isClose={popupHandler}></Guide>
-      <ResultPopup isOpen={isGameWon} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기"/>
-      <ResultPopup isOpen={isGameLost} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="오답" info={info} lBtn="메인으로" rBtn="다른문제풀기" />
+      <ResultPopup isOpen={isGameWon} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="정답" info={info} lBtn="메인으로" rBtn="다른문제풀기" isChallenge = {localStorage.getItem('level') === 'CHALLENGE'}/>
+      <ResultPopup isOpen={isGameLost} leftFunction={() => { goMainPage() }} rightFunction={() => { goNextQuiz() }} title="오답" info={info} lBtn="메인으로" rBtn="다른문제풀기" isChallenge = {localStorage.getItem('level') === 'CHALLENGE'}/>
       
       {/* <button onClick={() => { console.log(quizValue) }}>test</button> */}
       {/* <LevelPopUp isOpen={isOpen} isClose={popupHandler}/> */}

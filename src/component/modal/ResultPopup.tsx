@@ -13,10 +13,11 @@ type props = {
     title: string,
     info: WordInfo,
     lBtn: string,
-    rBtn: string
+    rBtn: string,
+    isChallenge: boolean,
 }
 
-export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, lBtn, rBtn }: props) => {
+export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, lBtn, rBtn, isChallenge }: props) => {
     const titleStyle = classNames(
         'title',
         {
@@ -77,8 +78,12 @@ export const ResultPopup = ({ isOpen, leftFunction, rightFunction, title, info, 
                 </div>
                 <br/>
                 <div className="footer">
-                    <button onClick={leftFunction}>{lBtn}</button>
-                    <button onClick={rightFunction}>{rBtn}</button>
+                    {!isChallenge ? <>
+                        <button onClick={leftFunction}>{lBtn}</button>
+                        <button onClick={rightFunction}>{rBtn}</button>
+                    </> : <>
+                        <button onClick={leftFunction}>{lBtn}</button>
+                    </>}
                 </div>
             </div>
             
