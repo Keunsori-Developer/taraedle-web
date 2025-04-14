@@ -65,7 +65,7 @@ export const ChalPopUp = ({ isOpen, isClose }: Modal) => {
                 leaveFrom="opacity-100"
                 leaveTo="opacity-0"
             >
-                <div className="infoBox" style={{ alignContent: "start", padding: '1rem' }}>
+                <div className="infoBox record" style={{ alignContent: "start", padding: '1rem' }}>
                     <span style={{fontSize: '2.5rem', marginTop: '1rem'}}>
                         챌린지
                     </span>
@@ -103,8 +103,13 @@ export const ChalPopUp = ({ isOpen, isClose }: Modal) => {
                                 <span  style={{textAlign: 'left'}}>
                                     새로운 챌린지 단어는 자정에 갱신됩니다.(KST 기준)
                                 </span><br/><br/>
-                                <h2 style={{ fontSize: '1.1rem' }}>나의 풀이 내역</h2>
-                                <Grid tries={qData.length } count={qData.length} guesses={qData} currentGuess={[]}/>
+                                {qData.length > 0 ? <>
+                                    <h2 style={{ fontSize: '1.1rem' }}>나의 풀이 내역</h2>
+                                    <Grid tries={qData.length } count={qData.length} guesses={qData} currentGuess={[]}/>
+                                </> :
+                                <>
+                                </>
+                                }
                             </>
                         }
                     </span>
