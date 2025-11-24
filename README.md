@@ -1,46 +1,48 @@
-# Getting Started with Create React App
+## 한글로 풀어보는 워들, 타래들
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 프로젝트 설명  
 
-## Available Scripts
+기존에 존재하는 게임인 워들 게임을 참고하여 한글로 풀 수 있는 워들 게임을 만들었습니다.
 
-In the project directory, you can run:
+### 프로젝트 내 역할
 
-### `npm start`
+해당 프로젝트는 웹과 모바일로 분리된 프로젝트로, 저는 그 중에서도 웹 프론트엔드를 맡아 해당 프로젝트의 웹 버전을 개발했습니다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 기술 스택
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+React.js, Typecript, Tailwind, Chart.js
 
-### `npm test`
+### 프로젝트 진행 설명
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![alt text](image.png)
 
-### `npm run build`
+기본 페이지입니다  
+로그인을 하지 않았을 경우 로그인 버튼만이 존재하고, 구글 연동을 통해 로그인을 시도합니다.  
+각 버튼을 클릭할 경우 모달 형태로 표시됩니다.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![alt text](image-1.png)  
+게임 시작 버튼 클릭시 난이도 선택창이 표시됩니다.  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+![alt text](image-2.png)  
+챌린지 버튼 클릭시 챌린지 설명과 시작 버튼이 표시됩니다.  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![alt text](IMG_2441.jpg)  
+챌린지 완료 후에는 이렇게 문제풀이 현황을 표시해줍니다.  
 
-### `npm run eject`
+![alt text](IMG_2440.PNG)  
+통계 버튼의 경우 해당 유저가 지금까지 푼 문제를 표시합니다.  
+Chart.js의 경우 해당 그래프를 출력하기 위해 사용하였습니다.  
+  
+  
+다음으로는 문제 풀이 페이지입니다.
+![alt text](image-4.png)  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![alt text](image-5.png)  
+물음표 버튼 클릭시 게임 설명 모달이 출력됩니다. 해당 설명을 통해 게임을 이해할 수 있습니다.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![alt text](image-6.png)![alt text](image-7.png)  
+단어 작성 후 Enter버튼 클릭시 게임 설명과 동일하게 결과가 출력되며, 존재하지 않는 단어일 경우 경고 메시지가 출력됩니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+![alt text](image-8.png)  
+정답을 맞출 경우 축하 gif 출력과 함께 단어가 출력됩니다. 챌린지 모드의 경우 해당 모달처럼 좌하단 메인으로 버튼만 존재하고, 일반 문제의 경우 다른문제 풀기가 출력됩니다.  
+모든 기회를 소진하고 정답을 맞추지 못했을 때에는 단어는 출력되나 축하 gif가 출력되지 않습니다.
