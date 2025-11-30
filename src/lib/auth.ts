@@ -40,7 +40,7 @@ export const setRefreshToken = (token: string) => {
 // }
 
 const apiClient: AxiosInstance = axios.create({
-    baseURL: 'https://api.randommagic.xyz',
+    baseURL: process.env.REACT_APP_API_URL,
     headers: {
         'Content-Type': 'application/json'
     }
