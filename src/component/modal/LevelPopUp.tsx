@@ -65,12 +65,6 @@ export const LevelPopUp = ({ isOpen, isClose }: Modal) => {
                         </h1>
                         2~3글자, 7~9개 자모음, 복합자모음 랜덤, 최대 6번 시도
                     </button>
-                    <button className="select" onClick={(e) => selectQuiz(e.currentTarget.value)} value={'CHALLENGE'}>
-                        <h1 style={{fontSize: '1.2rem'}}>
-                            챌린지
-                        </h1>
-                        3~4글자, 8~11개 자모음, 복합자모음 랜덤, 최대 8번 시도
-                    </button>
                     <button className="select" onClick={() => { isClose() }}>닫기</button>
                 </div>
                 
